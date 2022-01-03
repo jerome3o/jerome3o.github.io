@@ -1,3 +1,3 @@
 # Hikes
 
-## [Hauturu Mountain Peak](hauturu.md)
+## [Hauturu Mountain Peak](./hauturu.md)
