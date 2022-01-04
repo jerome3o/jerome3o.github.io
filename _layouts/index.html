@@ -1,0 +1,12 @@
+---
+layout: page
+---
+
+{{content}}
+
+<ul>
+  {% for post in site.posts %} {% if post.url %} {% if post.categories contains
+  page.filt %}
+  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endif %} {% endif %} {% endfor %}
+</ul>
