@@ -1,4 +1,7 @@
-# Smart Flat
+---
+layout: post
+title: Smart Flat
+---
 
 A Collection of silly smart home projects made as banter with my flatmates.
 

@@ -1,5 +1,5 @@
 ---
-layout: hikes
+layout: page
 title: Hikes
 permalink: /hikes/
 ---
