@@ -56,7 +56,7 @@ TODO
 Of the returning soldiers who formed a heroin addiction while at war, only 13% relapse on return home. Whereas people who get clean in rehab, but return to the environment in which they formed the addiction are 90% likely to relapse.
 
 Lessons:
-* The environment in which a habit is formed is naturally condusive to performing that habit. 
+* The environment in which a habit is formed is naturally conducive to performing that habit. 
 * You can change your habits easier by changing your environment. 
 * Those with the most will power need to use it the least.
 
