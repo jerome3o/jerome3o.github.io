@@ -12,7 +12,7 @@ It comprises of three moving parts:
 2. A [RabbitMQ deployment](https://github.com/jerome3o/jankyflat/blob/master/rabbitmq/docker-compose.yml) for brokering the request for annoying sounds
 3. A [consumer](https://github.com/jerome3o/jankyflat/blob/master/consumer/main.go) that listens for requests and plays a sound through a speaker in our hallway.
 
-If you've got a bunch of RPis, speakers, spare time, and good flatmates sitting around feel free to try it out. The [source code](https://github.com/jerome3o/jankyflat) is available to all, and setup and running is well documented in the read me.
+If you've got a bunch of RPis, speakers, spare time, and good flatmates sitting around feel free to try it out. The [source code](https://github.com/jerome3o/jankyflat) is available to all, and setup and running is well documented in the readme.
 
 The frontend (not my best work):
 
@@ -24,4 +24,4 @@ And our sound station:
 
 With the help our local DNS server and NGINX on our flat server whenever someone on our local network goes to `http://annoyingsound.lan` they can make a [gnome sound](https://www.youtube.com/watch?v=KnHmoA6Op1o)
 
-Why did I do this?
+Not sure why you'd want this, but it was fun to make nonetheless.
