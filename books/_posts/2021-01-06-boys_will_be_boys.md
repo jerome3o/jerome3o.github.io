@@ -4,6 +4,8 @@ title: Boys Will Be Boys
 author: Clementine Ford
 ---
 
+![boys_will_be_boys_cover](/books/assets/boys_will_be_boys_cover.jpg)
+
 Reading this book was like waking up from a weird fever dream. Maybe that is just because this was the first piece of feminist literature that I've read, or perhaps it was quality of Clementine's writing. After reading Boys Will Be Boys I became acutely aware of the inequalities our society is saturated with, of which my awareness was previously only notional. 
 
 I grew up in a relatively open minded family, where racial and gender equality were core tenets of my upbringing. But even from that cultural context I was taken aback by how prevalent the patriarchy is in our lives, and how well conventional wisdom and social norms could have continued to enable it's workings in my life.
@@ -36,13 +38,13 @@ This is a partial recollection of points from the book for the sake of my memory
     * The ability to laugh at a lot of jokes about sex comes from a position of privilege, as sexual assault is generally not something men have ever had to be afraid of in their lives
     * Any sexual joke at the expense of women simply reinforces the (sometimes unwitting) proponents of rape culture.
   * Public perception and discourse around sexual assault
-    * Victim blaming is still a thing somehow, as if it's impossible for a man to be expected to control his urges.
+    * Victim blaming is still prolific in public debate regarding sexual assault.
     * Rapists are real people, not some weird made up evil character that lurks in the shadows.
-      * Something like 1/8 women will be victims of sexual assault in their lives.
+      * Around 1/8 women will be victims of sexual assault in their lives.
       * It's most likely a friend or family member that will commit the crime.
     * The notion that woman use sexual assault cases as a means of ruining a mans career is debunked in the final chapter of the book where clementine lists about 50 famous men accused of sexual assault, who's careers are doing just fine.
 * Domestic Labour
-  * Societal expectation that women should disproportionately contribute to domestic labour is prolific and fundamentally unfair
+  * Societal expectation that women should disproportionately contribute to do mestic labour is prolific and fundamentally unfair
   * Commonly accepted notion of men "helping out" with chores is an example of how distorted this social norm is.
 
 I could write a lot more here, but you should just read the book.
