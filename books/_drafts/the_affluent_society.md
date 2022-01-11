@@ -44,3 +44,9 @@ title: The Affluent Society
   * Survival of the fittest was coined by Herbert Spencer, not Charles Darwin.
 
 6. The Marxian Pall
+
+7. Inequality
+
+As wealth became less visible in society people became less adverse to economic inequality. 
+
+Focus shifted from income redistribution to increased productivity
