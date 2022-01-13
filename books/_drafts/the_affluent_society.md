@@ -50,3 +50,25 @@ title: The Affluent Society
 As wealth became less visible in society people became less adverse to economic inequality. 
 
 Focus shifted from income redistribution to increased productivity
+
+8. Economic Security
+
+Production as a means to obtaining economic security. Ensuring production and consumption over depressions / recessions ensures economic stability. This can be achieved by things like employment insurance / benefits as in periods of unemployment people can still consume.
+
+9. The paramount position of production
+
+We are not actually rationally interested in actively increasing production. This can be observed by the absence of investment in the things that increase production in several industries. We take production as a measure of our achievement but we do actively strive to achieve.
+
+Our motivations to increase production is odd. We are over worried about idleness and bad resource allocation which were more relevant in previous centuries. 
+
+Little is done in peace time to increase capital formation.
+
+Little is invested in technological improvementswhere large increase in output are to be expected. 
+
+We aren't worried about the production loses in depression, we are far more concerned with economic stability.
+
+We value public goods much less than private production (advertising?). Associated to a long history of bad kings / feudal, public spending associated to socialism. Even though the desire for public goods are high.
+
+Maybe we aren't concerned with production because it's actually not that important. 
+
+"We have become persuaded of the dire importance of the goods we have, without our being in the slightest degree concerned about those we do not have. For we have wants at the margin only so far as they are synthesized. We do not manufacture the wants for good we do not produce"
