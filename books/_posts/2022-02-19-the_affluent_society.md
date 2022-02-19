@@ -3,6 +3,8 @@ layout: post
 title: The Affluent Society
 ---
 
+![the_affluent_society](/books/assets/the_affluent_society.png)
+
 This book was an awesome read for me, however it was doubly difficult as it's my first real dip into the world of economics, and it's one of the first books I've read from academia in the 1960s. It took a lot of google searches and vocabulary additions to get through, and I ended up fleshing out a lot of basic economic knowledge. So some things that I found insightful are probably basic economics, and as it was written in the 1960s it was cool to note what things had changed (seeming to be as a result of the knowledge explored in this book).
 
 An interesting insight in how economists have viewed the world (especially up until the 1960s), and the impacts on society this has had. Galbraith coins the term "Conventional Wisdom" as the set of concepts and opinions of the current common knowledge in academia. He then goes on to show how his contemporary conventional wisdom was formed and how it was quickly becoming inaccurate. He is particularly focused on how the conventional wisdom is particularly invested in production, and most public opinion on public policy generally has concerns with how said policy will effect overall production.
@@ -19,11 +21,9 @@ Galbraith then argues that now we are aware of the errors in the conventional wi
 * More unemployment benefits 
   * Focusing on employment is not the the best way to cure economic downturns/high inflation
   * Unemployment will be required to build a world that doesn't have production as a central focus
-* Increased Sales Tax
+* Increased Sales Tax (GST)
   * Sales tax grows with production and consumption more so than income tax
   * This would allow proportional funding for public goods
-
-The new class
 
 Interesting notes on conventional wisdom:
 * Humans naturally prefer ideas that are acceptable and familiar
