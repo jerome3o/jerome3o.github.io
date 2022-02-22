@@ -139,7 +139,7 @@ function drawPot(t) {
 
   strokeWeight(0);
   fill("#d74426")
-  textSize(64)
+  textSize(32)
   textAlign(CENTER, CENTER)
   text("for liv\n<3", w/2, (yPotTop - yPotBottom)/2 + yPotBottom)
 

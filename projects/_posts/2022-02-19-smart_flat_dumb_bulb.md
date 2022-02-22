@@ -9,7 +9,7 @@ Something annoying though is the plugs and bulbs I've used, despite all being tp
 
 Although I didn't quite succeed in making a unified app, but I did succeed in making an HTTP API for my lights (the plan was to make the frontend later). 
 
-This was written in typescript (to leverage the the [tp-link-tapo-connect](https://github.com/dickydoouk/tp-link-tapo-connect) api) and exposes two simple GET http endpoints: `/on` and `/off` which turn my light on and off respectively.
+This was written in TypeScript using [Express](https://expressjs.com/) (to leverage the the [tp-link-tapo-connect](https://github.com/dickydoouk/tp-link-tapo-connect) api) and exposes two simple GET http endpoints: `/on` and `/off` which turn my light on and off respectively.
 
 The source code for the project is [here](https://github.com/jerome3o/dumb_bulb)
 
