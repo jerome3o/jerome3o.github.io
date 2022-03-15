@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: book
 title: Guns Germs and Steel
 author: Jared Diamond
 ---

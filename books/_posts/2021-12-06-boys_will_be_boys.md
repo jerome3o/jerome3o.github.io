@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: book
 title: Boys Will Be Boys
 author: Clementine Ford
 ---
