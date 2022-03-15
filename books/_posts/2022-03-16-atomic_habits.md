@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: book
 title: Atomic Habits
 author: James Clear
 ---
