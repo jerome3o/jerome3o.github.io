@@ -25,25 +25,18 @@ let sliderWidth = 200
 
 let sliderSpec = [
     {
-        title: "Neighbourhood Radius",
-        settingKey: "distMax",
-        min: 0,
-        max: 600,
-        default: 50.0
-    },
-    {
-        title: "Velocity",
-        settingKey: "velocityMax",
-        min: 0,
-        max: 1000,
-        default: 200.0
-    },
-    {
         title: "Separation",
         settingKey: "separationFactor",
         min: 0,
         max: 50,
         default: 20.0
+    },
+    {
+        title: "Alignment",
+        settingKey: "alignmentFactor",
+        min: 0,
+        max: 10,
+        default: 3.0
     },
     {
         title: "Cohesion",
@@ -52,12 +45,20 @@ let sliderSpec = [
         max: 10,
         default: 1.0
     },
+
     {
-        title: "Alignment",
-        settingKey: "alignmentFactor",
+        title: "Velocity",
+        settingKey: "velocityMax",
         min: 0,
-        max: 10,
-        default: 3.0
+        max: 1000,
+        default: 200.0
+    },
+    {
+        title: "Neighbourhood Radius",
+        settingKey: "distMax",
+        min: 0,
+        max: 600,
+        default: 50.0
     }
 ]
 let sliders = {}
