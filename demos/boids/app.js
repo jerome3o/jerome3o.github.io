@@ -1,8 +1,15 @@
 const go = new Go();
-const wasmFile = "/demos/boids/boids.wasm"
 
 let w = window.innerWidth > 0 ? window.innerWidth : screen.width;
 let h = window.innerHeight > 0 ? window.innerHeight : screen.height;
+
+WebAssembly.instantiateStreaming(fetch("boids.wasm"), go.importObject).then((result) => {
+    go.run(result.instance);
+}).then(v => {
+    console.log(initBoids(w, h));
+    boidsInitialised = true  // TODO(j.swannack): actually check for successful init
+});
+
 let boidsInitialised = false
 let lastMs = 0.0
 
@@ -25,7 +32,7 @@ let sliderSpec = [
         default: 50.0
     },
     {
-        title: "Maximum Velocity",
+        title: "Velocity",
         settingKey: "velocityMax",
         min: 0,
         max: 1000,
@@ -36,7 +43,7 @@ let sliderSpec = [
         settingKey: "separationFactor",
         min: 0,
         max: 50,
-        default: 3.0
+        default: 20.0
     },
     {
         title: "Cohesion",
@@ -51,38 +58,9 @@ let sliderSpec = [
         min: 0,
         max: 10,
         default: 3.0
-    },
-    {
-        title: "Random Movement",
-        settingKey: "randomFactor",
-        min: 0,
-        max: 100,
-        default: 1.0
-    },
-    {
-        title: "Fear of Mouse",
-        settingKey: "fearFactor",
-        min: 0,
-        max: 100,
-        default: 50.0
-    },
+    }
 ]
 let sliders = {}
-
-WebAssembly.instantiateStreaming(fetch(wasmFile), go.importObject).then((result) => {
-    go.run(result.instance);
-}, r => {
-    fetch(wasmFile).then(response => 
-        response.arrayBuffer()
-    ).then(bytes =>{
-        console.log(bytes)
-        WebAssembly.instantiate(bytes, go)
-    } 
-    )
-}).then(v => {
-    console.log(initBoids(w, h));
-    boidsInitialised = true  // TODO(j.swannack): actually check for successful init
-});
 
 function setup() {
     createCanvas(w, h)
@@ -175,9 +153,9 @@ function drawSliderText() {
 
 function drawDebugBoid(boid, neighbours, settings) {
     push()
-    stroke("purple")
     fill(0,0,0,0)
     strokeWeight(1)
+    stroke(255, 0, 255, 50)
     circle(boid[0], boid[1], 20)
     circle(boid[0], boid[1], settings.distMax*2)
 
