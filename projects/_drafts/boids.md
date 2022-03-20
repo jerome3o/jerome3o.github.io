@@ -19,3 +19,11 @@ I also set up some sliders to allow you to configure the different boid paramete
 
 
 And to get a little look under the hood I've added in a debug boid (I actually used this for debugging but thought it was quite cool so kept it). This boid has a large purple circle around it indicating it's neighbourhood, and any boid in that neighbourhood is also indicated by a smaller surrounding purple circle.
+
+### Future work
+
+The next steps I would take on this project would be:
+* Add a slider for number of boids, allowing the user to see what their machine can handle!
+* Use a spacial grid to lower the time complexity of the boids update. The current implementation is O(n^2) as we loop over each boid when determining a boids neighbour - this could be significantly reduced by partitioning the boids by their position in a grid on the screen and only looping through relevant boids. That would reduce the average case, but the worse case time complexity would still be O(n^2).
+* Make it 3D. That would be fun, and I might do it further down the line if I want to look into web graphics engines.
+* Add predators, or static objects that the boids avoid (other than the mouse).
