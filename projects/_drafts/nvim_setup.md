@@ -43,6 +43,7 @@ TODO: link to dotfiles
 ## New in nvim
 
 * Copilot (never used it in VSCode)
+* Tab completion using words in the current buffer
 
 ## Left behind
 
