@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Machine Learning Rig: Building an AMD ML Rig with Gaming Hardware"
+title: "Machine Learning Rig: The Build"
 ---
 
 # Building a Machine Learning Rig from Misc Gaming Hardware
@@ -50,7 +50,7 @@ Here are some pics from the build:
 
 ### On-off button
 
-Funny story - After putting it all together, I realised that I didn't have a power button. I was turning it on and off by manually shorting the pins on the motherboard. I realised the GPUs had an overclocking button on them, so I figured I could just use that. It was only attached to the GPU with some header pin, so I just pulled them off and plugged it into the motherboard, and it worked!
+Funny story - After putting it all together, I realised that I didn't have a power button. I was turning it on and off by manually shorting the pins on the motherboard. I realised the GPUs had an overclocking button on them, so I figured I could just use that. It was only attached to the GPU with some header pins, so I pulled it off and plugged it into the motherboard, and it worked without modification!
 
 ![build_3](/projects/assets/mlrig_build_3.jpg)
 
@@ -87,7 +87,7 @@ I'm going to tinker with the GPU settings to optimise for machine learning perfo
 
 ### JupyterLab
 
-![jupyterlab](/projects/assets/mlrig_build_jupyterlab.png)](/projects/assets/mlrig_build_5.png)
+![jupyterlab](/projects/assets/mlrig_build_jupyterlab.png)
 
 
 ## Next steps
