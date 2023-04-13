@@ -43,37 +43,66 @@ After a bunch of googling, I converged on two solutions I was interested in:
 I decided to go with Prometheus and Grafana for a few reasons:
   * I have several other machines I want to monitor (RPi's, other servers)
   * Eventually want to make a Grafana dashboard for my partner's fish tank (heat/salinity/pH/etc)
-  * I want to set it up using Ansible (yet another learning detour)
+  * I want to set it up using [Ansible](https://www.ansible.com/) (even more learning!)
   * I have briefly used Prometheus and Grafana before (at work) and wanted to learn more about them
   * I will likely learn about WandB in future projects anyway when I start experimenting with ML a lot more
 
 ## Implementation
 
-### Node Exporter and Ansible
+The following is an outline of how I set it all up, with links to the relevant code.
 
 ### Prometheus and Grafana
 
+On an existing server at my house I set up a [`docker-compose`   file](https://github.com/jerome3o/pytorch_tut/blob/master/metrics/docker-compose.yml) based on their respective docs to run Prometheus and Grafana (and env vars in a .env for grafana credentials). It runs grafana on port 3000 and prometheus on port 9090.
+
+With `docker-compose` being as awesome as it is, there isn't much else to talk about here. Prometheus still needs configuring so it scrapes the metrics from the ML rig and other servers, but I'll get to that once we've got metrics exposed to scrape.
+
+### Node Exporter and Ansible
+
+Now that grafana and prometheus are running, I need to get metrics from my machines. After some googling I found [node-exporter](https://github.com/prometheus/node_exporter), and decided this would be a good place to start. It's a prometheus exporter for machine metrics written in Go.
+
+Seeing as I have a bunch of machines I want to monitor, I decided to use [Ansible](https://www.ansible.com/) to install node-exporter on all of them. It probably took me just as long to learn Ansible as it would have to install node-exporter on all my machines manually, but it was a fun learning experience and it may come in handy in future if I need to set up a bunch of machines.
+
+I set up a [repo](https://github.com/jerome3o/ansible-jerome) with an [inventory](https://github.com/jerome3o/ansible-jerome/blob/main/inventory.yaml) of all my machines, and a [playbook](https://github.com/jerome3o/ansible-jerome/blob/main/playbooks/node-exporter.yaml) to install node-exporter. 
+
+I also set up a vault and put all the sensitive data (passwords, ssh keys, ip addresses etc) in it, allowing full configuration as code.
+
+I then ran the playbook on all my machines with:
+
+```sh
+ansible-playbook \
+  -b \
+  -i inventory.yaml \
+  --extra-vars=@vault.yaml \
+  --ask-vault-pass \
+  playbooks/node-exporter.yaml
+```
+
+And voila, node-exporter was installed on all my machines. Magic!
+
 ### Custom ROCm Prometheus Metrics Exporter
 
+This is good and all, but I still need to get metrics from my GPUs. I couldn't find any easy out of the box prometheus clients for AMD GPUs, so I decided to write my own. 
 
-* Added [node-exporter](TODO: Link) to all my machines
-  * 3 RPis, 2 servers (including the ML rig), 2 PCs, and two laptops
-  * Set up [Ansible](TODO: link to ansible) to install node-exporter
-    * Ansible was a bit of a learning detour
-    * Eventually set up a [repo I was happy with](TODO: Link to ansible-jerome)
-      * Inventory with all my devices
-      * All sensitive data in a vault
-      * Prometheus package installed via ansible-galaxy
-      * Playbook setup for node-exporter
-* Set up prometheus + grafana on another server with [docker-compose](TODO: link to my compose file somehow?)
-* Set up [prometheus.yml](TODO: link to prometheus.yml somehow) and some grafana dashboard
-* This was good - had CPU, RAM, Network, storage metrics for all my machines
-* Still missing GPU Metrics!
-  * Couldn't find any easy out of the box prometheus clients for AMD GPUs (link to random golang one)
-  * TODO: google around for pure CUDA prometheus clients! they will probably work
-  * Ended up writing a quick n dirty [rocm prom client](TODO: link to rocm-prom-metrics)
-    * Had to make a few patches to rocm-smi
-    * Deployed on ml rig manually with systemd units so it starts on boot
-* All done! had a play around in JupyterLab to see everything was wired up properly 
+I wrote a quick wrapper on top of the [rocm-smi](https://docs.amd.com/bundle/ROCm-System-Management-Interface-Guide/page/ROCm-SMI-CLI.html) cli in python (my native tounge) and used the [prometheus python client](https://github.com/prometheus/client_python) to expose the metrics. I then set up a [systemd unit](https://github.com/jerome3o/rocm-prom-metrics/blob/master/rocm-prom-metrics.service) to run it on boot.
 
-TODO: Image of dashboard
+The source code for this is available [here](https://github.com/jerome3o/rocm-prom-metrics). Note that I also had to make a slight patch to the rocm-smi cli to get it correctly exporting VRAM when the JSON flag is set. I've submitted a [PR](https://github.com/RadeonOpenCompute/rocm_smi_lib/pull/120) to the rocm-smi repo to get the fix merged in.
+
+### Prometheus Configuration
+
+Now that I have metrics being exposed on all my machines (including the GPU specific stuff on the mlrig), I need to tell prometheus to scrape them. I set up a [prometheus.yml](https://github.com/jerome3o/pytorch_tut/blob/master/metrics/prometheus.yml) (ip addresses/host names redacted) with scrape configs for all the node-exporters and the rocm-prom-metrics exporter. I then restarted prometheus and it started scraping all the metrics.
+
+
+## Final Result
+
+After all that, I put together two Grafana dashboards with all the metrics I want, one for the ML Rig, and another for all my other machines. 
+
+I can see the GPU usage, temperature, power usage, and CPU/GPU/RAM usage of the ML rig. I can also see the CPU/GPU/RAM usage of my 3 raspberry pi's, server, 2 laptops, and me and my partner's PCs. Looking very nice 👌👌
+
+### ML Rig Dashboard
+
+![mlrig_dashboard](/projects/assets/mlrig_build_grafana_mlrig.png)
+
+### Other Machines Dashboard
+
+![other_machines_dashboard](/projects/assets/mlrig_build_grafana.png)
