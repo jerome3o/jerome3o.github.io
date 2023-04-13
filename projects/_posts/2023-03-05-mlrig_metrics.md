@@ -63,7 +63,7 @@ Now that grafana and prometheus are running, I need to get metrics from my machi
 
 Seeing as I have a bunch of machines I want to monitor, I decided to use [Ansible](https://www.ansible.com/) to install node-exporter on all of them. It probably took me just as long to learn Ansible as it would have to install node-exporter on all my machines manually, but it was a fun learning experience and it may come in handy in future if I need to set up a bunch of machines.
 
-I set up a [repo](https://github.com/jerome3o/ansible-jerome) with an [inventory](https://github.com/jerome3o/ansible-jerome/blob/main/inventory.yaml) of all my machines, and a [playbook](https://github.com/jerome3o/ansible-jerome/blob/main/playbooks/node-exporter.yaml) to install node-exporter. 
+I set up an Ansible [repo](https://github.com/jerome3o/ansible-jerome) with an [inventory](https://github.com/jerome3o/ansible-jerome/blob/main/inventory.yaml) of all my machines, and a [playbook](https://github.com/jerome3o/ansible-jerome/blob/main/playbooks/node-exporter.yaml) to install node-exporter. 
 
 I also set up a vault and put all the sensitive data (passwords, ssh keys, ip addresses etc) in it, allowing full configuration as code.
 
