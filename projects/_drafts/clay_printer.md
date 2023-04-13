@@ -13,24 +13,24 @@ Mum recently started working with clay 3D printers as part of personal career gr
 
 All of the technical work with the 3D printer was done in collaboration with [Kieran](https://www.linkedin.com/in/kieran-hitchcock/), and all the glazing and firing was done in collaboration with my mother, in her pottery studio.
 
-## Overview
+# Overview
 
-I'll give an overview of the making process from design in blender to firing the finished product in a kiln, and then I'll give a summary of all the interesting hiccups and learnings we had along the way.
+I'll give an overview of the making process from design in blender to firing the finished product in a kiln, and then I'll give a summary of all the interesting hiccups, happy accidents, and learnings we had along the way.
 
-## Process
+# Process
 
-### Design and rendering
+## Design and rendering
 
 * Design in Blender
 * Render in Cura
 * MicroSD to printer
 
-#### A note on design limitations
+### A note on design limitations
 
 * Can't have any over-hanging parts or the clay will slump
 * The larger can get quite unstable as the clay is very soft, so making sure the design is well stacked vertically is a must
 
-### Printer setup
+## Printer setup
 
 * Clay prep
   * Adding water
@@ -43,15 +43,16 @@ I'll give an overview of the making process from design in blender to firing the
 * Monitor printing
 * Let dry on cardboard
 
-### Pottery
+## Pottery
 
 * Bisque fire
 * Glaze
 * Fire
 
 
+# Happy Accidents and Learnings
 
-## Next steps
+# Next steps
 
 * Streamline the process
 * Expertiment with glazes
