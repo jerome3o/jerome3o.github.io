@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Machine Learning Rig: Building a Machine Learning Rig (with misc gaming hardware)
+title: "Machine Learning Rig: Building an AMD ML Rig with Gaming Hardware"
 ---
 
 # Building a Machine Learning Rig from Misc Gaming Hardware
