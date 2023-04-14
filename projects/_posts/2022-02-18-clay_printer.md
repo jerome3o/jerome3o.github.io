@@ -58,7 +58,7 @@ Note that Kieran has done an awesome [write up](https://github.com/jerome3o/clay
 - Monitor printing
   - Turn on the printer, select the design and start printing!
   - Stand by incase of a failure, to reset and start again avoiding wasted time and clays
-- Removing workings
+- Removing works
   - Very carefully remove the work from the printer
   - Put it somewhere with relatively stagnant airflow
     - this allows it to dry slowly and evenly, reducing non-uniform shrinkage related cracks
@@ -68,9 +68,31 @@ Note that Kieran has done an awesome [write up](https://github.com/jerome3o/clay
 
 ### Pottery
 
-- Bisque fire
+Once you have a collection of printed works, it's time for them to go through the firing process in a kiln.
+
+- Bisque firing
+  - A bisque firing is the first of two firings
+  - It generally gets up to 900°C-980°C
+  - The purpose of the bisque is to harden the work, and to prepare it for glazing
+  - Some important things that occur in the bisque firing:
+    - Water evaporates from the clay (>100°C), drying it out completely
+    - Sintering occurs (800°C-900°C)
+      - Clay particles fuze together, meaning the bisqued work will no longer break down in water
+  - Depending on the size/thickness of your pieces, you should slow down the temperature raise to avoid thermal shock
+    - All our pieces were quite small and thin, meaning we could quickly raise to ~900°C at about 150°C an hour
 - Glaze
-- Fire
+  - Once bisqued, your piece is ready for glazing
+  - Glaze is the shiny glassy exterior on ceramics, it make the works waterproof and more durable
+  - Glazes are generally a suspension of silica, flux, aluminum oxide, and colourants.
+  - Take the bisqued works and dip them in a bucket of stirred glaze for about a second, and then leave them to dry
+  - The completely dry work will pull in the liquid from the glaze, leaving a film of particulate (from the suspension) evenly across the exterior of the work.
+  - This film of particulate will be melted into glass in the next firing
+- Final firing
+  - The final firing goes to around 1200°C, and melts the glaze, fuzing it to the bisqued clay
+  - The heating and cooling rates are more important to consider here, as the glaze and the clay body will heat at different rates and will potentially have different heat expansion ratios.
+  - You will need to find an appropriate profile for your clay and glaze
+
+After the final firing, you have finished pieces ready for use!
 
 ## Happy Accidents and Learnings
 
