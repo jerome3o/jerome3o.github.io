@@ -3,8 +3,8 @@ email: jeromeswannack@gmail.com
 description: >-
   Documentation of miscellaneous projects by Jerome Swannack
 baseurl: ""
-url: "http://www.jeromeswannack.com"  # TODO: set up https
-github_username:  jerome3o
+url: "http://www.jeromeswannack.com" # TODO: set up https
+github_username: jerome3o
 
 # Build settings
 markdown: kramdown
@@ -16,7 +16,6 @@ collections:
   - books
   - hikes
   - projects
-
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
