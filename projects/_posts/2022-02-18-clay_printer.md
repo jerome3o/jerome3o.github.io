@@ -167,7 +167,7 @@ We found that you can't just start up a print, you should get it extruding a bun
 
 ### Speed Wobbles
 
-If the extrusion was coming out too fast (or if the work wasn't directly bellow the extruder) the extrusion would output side to side, creating a blemish on the side of the work
+If the extrusion was coming out too fast, or if the work wasn't directly bellow the extruder (i.e. because of an air bubble crater) the extrusion would output side to side, creating a blemish on the side of the work
 
 {% include image-gallery.html folder="/projects/assets/clay/speed_wobbles" %}
 
