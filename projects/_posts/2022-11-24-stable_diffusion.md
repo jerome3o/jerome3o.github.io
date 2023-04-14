@@ -33,19 +33,34 @@ In this video I generated random noise from a few different random seeds, and th
 Here is a diagram describing this process:
 
 ![stable-diffusion-noise-interpolation](/projects/assets/stable-diffusion/stable-diffusion-noise-interpolation.svg)
+
+And this is the result of the prompt: `Medieval Castle`
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Pd9R_i5Gsa4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+And here is one with the prompt: `Shi Tzu puppies`
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gFtmpPKGvjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+These are interesting, however the subject of the images don't change. The other angle for tinkering is in the prompt, we can do a similar thing as before, but this time interpolate between a sequence of embedded prompts, as described in the diagram below:
+
 ![stable-diffusion-prompt-interpolation](/projects/assets/stable-diffusion/stable-diffusion-prompt-interpolation.svg)
 
-## Videos
+This ends up a bit more interesting as you can kind of tell a story. Here is a video made from a sequence of prompts describing the history of human civilization:
 
-Generating animations from latent space interpolation
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2KtQzlS8vrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-- New AMD Raedon RX 6800 GPU, 16gb VRAM, want to use it for stable diffusion image generation
-- Text -> Tokens -> Embedding + Seed -> Diffusion -> Image
-- Changing/interpolating the seed (examples)
-- Changing/interpolating the embedded prompt (examples)
-- Code link (TODO)
+And one of an octopus somehow turning into the flying spaghetti monster:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eP3gimF5ci4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+The rest of my videos can be found on [this playlist](https://www.youtube.com/playlist?list=PLqHDGIqcqwiv_kA4ijCODwR398fvYuwbM)
+
+# Source Code and Next Steps
+
 - Next steps
-  - Dynamic interpolation steps controlling for image deltas
-  - Include multiple (>2) prompts in the interpolation
-  - Sync it with music
+  - Dynamic interpolation steps controlling for image deltas, to smooth out the videos
+  - Sync it with music!
   - Make a UI for generating these (or add to existing)
+
+* [Source code for my experiments](https://github.com/jerome3o/stable-diffusion/blob/main/scratch.ipynb) (excuse the mess, it's just a scratch pad)
