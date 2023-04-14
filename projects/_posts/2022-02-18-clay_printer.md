@@ -106,6 +106,8 @@ After the final firing, you have finished pieces ready for use!
 
 ## Happy Accidents, Learnings, and Experiments
 
+![failures](/projects/assets/clay/failures/glazed_failure_collection_clear.jpeg)
+
 ### Air bubbles
 
 If the ram extruder isn't packed well, there will be little pops of air that come out the extruder, this results in little explosions on the side. Our packing method mitigated most of this, however it still happened on occasion
@@ -126,6 +128,12 @@ The different options for Z Seam Alignment are:
   - I Believe this was the best option, with other settings forcing the seam to be hidden
 
 {% include image-gallery.html folder="/projects/assets/clay/z_seam" %}
+
+### Collapsing
+
+With structurally unstable designs, we had a lot of them topple over just after finishing printing, we learnt that leaving it to dry for a while in the printer was good for bigger works, despite slowing down production significantly.
+
+{% include image-gallery.html folder="/projects/assets/clay/collapse" %}
 
 ### Over-extrusion
 
@@ -163,6 +171,12 @@ If the extrusion was coming out too fast (or if the work wasn't directly bellow 
 
 {% include image-gallery.html folder="/projects/assets/clay/speed_wobbles" %}
 
+### Over Glazing
+
+When glazing the bisqued works, if they are dipped too long (or re-dipped) there can be too much glaze, which causes dripping and the work adhering to the kiln shelf or the stands it was on during the firing
+
+{% include image-gallery.html folder="/projects/assets/clay/over_glazing" %}
+
 ### Mini Faces
 
 We opened up the floor for friends and family to make some works, my partner flexed her blender skills and made some plant pots with faces on them
@@ -171,13 +185,7 @@ We opened up the floor for friends and family to make some works, my partner fle
 
 ### Successful Pieces
 
-#### Octo Spiral Cup
-
-{% include image-gallery.html folder="/projects/assets/clay/octo_cup" %}
-
-#### White Noise Vase
-
-{% include image-gallery.html folder="/projects/assets/clay/white_noise" %}
+{% include image-gallery.html folder="/projects/assets/clay/successful" %}
 
 ## Next steps
 
