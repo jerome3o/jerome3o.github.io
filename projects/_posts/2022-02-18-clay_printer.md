@@ -5,6 +5,8 @@ title: Clay 3D Printing
 
 ## The Intersection of Computer Science and Pottery
 
+![banner](/projects/assets/clay/all/glazed_successful_clear_two_pieces.jpeg)
+
 I have recently been interested in finding projects that link pottery and computer science together. My mother is a visual artist who has spent a large portion of her life working with clay, and I have spent a large part of my life playing with and working on computers, currently working as a software developer.
 
 I feel that we both exsert a lot of creativity in our respective fields, but it is quite hard to bridge the two in a common language.
