@@ -46,7 +46,7 @@ These are interesting, however the subject of the images don't change. The other
 
 ![stable-diffusion-prompt-interpolation](/projects/assets/stable-diffusion/stable-diffusion-prompt-interpolation.svg)
 
-This ends up a bit more interesting as you can kind of tell a story. Here is a video made from a sequence of prompts describing the history of human civilization:
+This ends up a bit more interesting as you can kind of tell a story. Here is a video made from a sequence of prompts describing the history of human civilization with a dark turn at the end (it should be noted in these videos I am also interpolating across different seeds):
 
 <iframe width="100%" height="495" src="https://www.youtube.com/embed/2KtQzlS8vrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
