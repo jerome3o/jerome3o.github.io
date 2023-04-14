@@ -36,11 +36,11 @@ Here is a diagram describing this process:
 
 And this is the result of the prompt: `Medieval Castle`
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Pd9R_i5Gsa4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="100%" height="495" src="https://www.youtube.com/embed/Pd9R_i5Gsa4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 And here is one with the prompt: `Shi Tzu puppies`
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gFtmpPKGvjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="100%" height="495" src="https://www.youtube.com/embed/gFtmpPKGvjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 These are interesting, however the subject of the images don't change. The other angle for tinkering is in the prompt, we can do a similar thing as before, but this time interpolate between a sequence of embedded prompts, as described in the diagram below:
 
@@ -48,11 +48,11 @@ These are interesting, however the subject of the images don't change. The other
 
 This ends up a bit more interesting as you can kind of tell a story. Here is a video made from a sequence of prompts describing the history of human civilization:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2KtQzlS8vrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="100%" height="495" src="https://www.youtube.com/embed/2KtQzlS8vrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 And one of an octopus somehow turning into the flying spaghetti monster:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eP3gimF5ci4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="100%" height="495" src="https://www.youtube.com/embed/eP3gimF5ci4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 The rest of my videos can be found on [this playlist](https://www.youtube.com/playlist?list=PLqHDGIqcqwiv_kA4ijCODwR398fvYuwbM)
 
