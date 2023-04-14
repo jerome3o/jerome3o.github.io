@@ -66,6 +66,8 @@ Note that Kieran has done an awesome [write up](https://github.com/jerome3o/clay
   - Once you've finished your printing session make sure to wash clay off all components
   - Letting clay dry on important mechanical components can be a pain to clean up later
 
+{% include image-gallery.html folder="/projects/assets/clay/drying" %}
+
 ### Pottery
 
 Once you have a collection of printed works, it's time for them to go through the firing process in a kiln.
@@ -80,6 +82,9 @@ Once you have a collection of printed works, it's time for them to go through th
       - Clay particles fuze together, meaning the bisqued work will no longer break down in water
   - Depending on the size/thickness of your pieces, you should slow down the temperature raise to avoid thermal shock
     - All our pieces were quite small and thin, meaning we could quickly raise to ~900°C at about 150°C an hour
+
+{% include image-gallery.html folder="/projects/assets/clay/bisque" %}
+
 - Glaze
   - Once bisqued, your piece is ready for glazing
   - Glaze is the shiny glassy exterior on ceramics, it make the works waterproof and more durable
@@ -87,10 +92,15 @@ Once you have a collection of printed works, it's time for them to go through th
   - Take the bisqued works and dip them in a bucket of stirred glaze for about a second, and then leave them to dry
   - The completely dry work will pull in the liquid from the glaze, leaving a film of particulate (from the suspension) evenly across the exterior of the work.
   - This film of particulate will be melted into glass in the next firing
+
+{% include image-gallery.html folder="/projects/assets/clay/glazing" %}
+
 - Final firing
   - The final firing goes to around 1200°C, and melts the glaze, fuzing it to the bisqued clay
   - The heating and cooling rates are more important to consider here, as the glaze and the clay body will heat at different rates and will potentially have different heat expansion ratios.
   - You will need to find an appropriate profile for your clay and glaze
+
+{% include image-gallery.html folder="/projects/assets/clay/final_firing" %}
 
 After the final firing, you have finished pieces ready for use!
 
@@ -99,6 +109,8 @@ After the final firing, you have finished pieces ready for use!
 ### Air bubbles
 
 If the ram extruder isn't packed well, there will be little pops of air that come out the extruder, this results in little explosions on the side. Our packing method mitigated most of this, however it still happened on occasion
+
+{% include image-gallery.html folder="/projects/assets/clay/air_bubbles" %}
 
 ### Z-Seam
 
@@ -113,40 +125,66 @@ The different options for Z Seam Alignment are:
 - Shortest
   - I Believe this was the best option, with other settings forcing the seam to be hidden
 
+{% include image-gallery.html folder="/projects/assets/clay/z_seam" %}
+
 ### Over-extrusion
 
 When the extrusion rate was set too high the output clay would be deformed outward, resulting in some thick walls
+
+{% include image-gallery.html folder="/projects/assets/clay/overextrusion" %}
 
 ### Incorrect layer heights
 
 If the layer height was too big the extruder would get too far from the work and the extruded clay would splay in and out sideways. I quite liked these ones.
 
+{% include image-gallery.html folder="/projects/assets/clay/layer_heights" %}
+
 ### Skipping the bottom layers
 
 After seeing the wobbles from the large layer heights we decided to skip the first few layers, in order to see what wobbly structures we could make. We ended up with some beautiful spaghetti bowls
+
+{% include image-gallery.html folder="/projects/assets/clay/skip_bottom" %}
 
 ### Thin Bottoms
 
 Getting the bottom of the works to say intact was tricky, the would often peel off, disconnect, or crack off the bottom plate. We ended up mitigating this by making the bottom layers slightly over-extruded and a few layers thicker.
 
+{% include image-gallery.html folder="/projects/assets/clay/thin_bottom" %}
+
 ### Cold Starts
 
 We found that you can't just start up a print, you should get it extruding a bunch of clay (by starting a print and stopping it part way through the beginning) first, then quickly restart with the build plate below. Cold starts result in weak bases of the work.
+
+{% include image-gallery.html folder="/projects/assets/clay/cold_start" %}
 
 ### Speed Wobbles
 
 If the extrusion was coming out too fast (or if the work wasn't directly bellow the extruder) the extrusion would output side to side, creating a blemish on the side of the work
 
+{% include image-gallery.html folder="/projects/assets/clay/speed_wobbles" %}
+
 ### Mini Faces
 
 We opened up the floor for friends and family to make some works, my partner flexed her blender skills and made some plant pots with faces on them
 
+{% include image-gallery.html folder="/projects/assets/clay/mini_faces" %}
+
 ### Successful Pieces
+
+#### Octo Spiral Cup
+
+{% include image-gallery.html folder="/projects/assets/clay/octo_cup" %}
+
+#### White Noise Vase
+
+{% include image-gallery.html folder="/projects/assets/clay/white_noise" %}
 
 ## Next steps
 
 - Streamline the process
-- Expertiment with glazes
+- Experiment with glazes
 - Try and get the outputs water tight
+
+## All Images
 
 {% include image-gallery.html folder="/projects/assets/clay/all" %}
