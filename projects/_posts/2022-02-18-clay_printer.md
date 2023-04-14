@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Clay 3D Printing
+title: "Throwing Exceptions: Clay 3D Printing"
 ---
 
 ## The Intersection of Computer Science and Pottery
