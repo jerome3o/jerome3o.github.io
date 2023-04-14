@@ -101,3 +101,5 @@ After the final firing, you have finished pieces ready for use!
 - Streamline the process
 - Expertiment with glazes
 - Try and get the outputs water tight
+
+{% include image-gallery.html folder="/projects/assets/clay/all" %}
