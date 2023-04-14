@@ -94,7 +94,54 @@ Once you have a collection of printed works, it's time for them to go through th
 
 After the final firing, you have finished pieces ready for use!
 
-## Happy Accidents and Learnings
+## Happy Accidents, Learnings, and Experiments
+
+### Air bubbles
+
+If the ram extruder isn't packed well, there will be little pops of air that come out the extruder, this results in little explosions on the side. Our packing method mitigated most of this, however it still happened on occasion
+
+### Z-Seam
+
+In Cura there are settings for "Z Seam Alignment", this determines where the extruder starts and ends each layer - which can end up resulting in a seam in the work going up the Z direction.
+
+The different options for Z Seam Alignment are:
+
+- Sharpest Corner
+  - This worked ok if there were well defined corners on the work
+- Random
+  - This resulted in a bunch of cross hanging extrusions, which looked cool but made the piece unusable
+- Shortest
+  - I Believe this was the best option, with other settings forcing the seam to be hidden
+
+### Over-extrusion
+
+When the extrusion rate was set too high the output clay would be deformed outward, resulting in some thick walls
+
+### Incorrect layer heights
+
+If the layer height was too big the extruder would get too far from the work and the extruded clay would splay in and out sideways. I quite liked these ones.
+
+### Skipping the bottom layers
+
+After seeing the wobbles from the large layer heights we decided to skip the first few layers, in order to see what wobbly structures we could make. We ended up with some beautiful spaghetti bowls
+
+### Thin Bottoms
+
+Getting the bottom of the works to say intact was tricky, the would often peel off, disconnect, or crack off the bottom plate. We ended up mitigating this by making the bottom layers slightly over-extruded and a few layers thicker.
+
+### Cold Starts
+
+We found that you can't just start up a print, you should get it extruding a bunch of clay (by starting a print and stopping it part way through the beginning) first, then quickly restart with the build plate below. Cold starts result in weak bases of the work.
+
+### Speed Wobbles
+
+If the extrusion was coming out too fast (or if the work wasn't directly bellow the extruder) the extrusion would output side to side, creating a blemish on the side of the work
+
+### Mini Faces
+
+We opened up the floor for friends and family to make some works, my partner flexed her blender skills and made some plant pots with faces on them
+
+### Successful Pieces
 
 ## Next steps
 
