@@ -3,6 +3,7 @@ layout: post
 title: "Stable Diffusion: Latent Exploration"
 ---
 
+![double_horse](/projects/assets/stable_diffusion_double_horse.png)
 ## Exploring Latent Space
 
 After OpenAI released [DALL-E 2](https://openai.com/product/dall-e-2) my fascination with AI image generation was piqued, and when [Stability AI](https://stability.ai/stable-diffusion) open sourced [Stable Diffusion](https://github.com/CompVis/stable-diffusion) I couldn't wait to tinker.
