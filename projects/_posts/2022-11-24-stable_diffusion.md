@@ -14,7 +14,7 @@ Most people will explore the space by giving these models prompts - but this is 
 
 After OpenAI released [DALL-E 2](https://openai.com/product/dall-e-2) my fascination with AI image generation was piqued, and when [Stability AI](https://stability.ai/stable-diffusion) open sourced [Stable Diffusion](https://github.com/CompVis/stable-diffusion) I couldn't wait to tinker.
 
-I read about the concept of "exploring latent space" and I ended up buying an RX6800 GPU on [trademe](https://www.trademe.co.nz/a/) for a good price (and then bought two more..) just to run stable diffusion. This post will go over that process, with some videos exploring stable-diffusion's latent space.
+I read about the concept of "exploring latent space" and I ended up buying an RX6800 GPU on [trademe](https://www.trademe.co.nz/a/) for a good price (and then bought two more..) just to run stable diffusion.
 
 ## Technical Explanation
 
