@@ -8,7 +8,7 @@ title: "Stable Diffusion: Latent Exploration"
 
 "Latent Space" (latent meaning unrealized, existing but not yet manifested) in AI image generation is effectively all of the potential images that an image generation model like Stable Diffusion or DALL-E 2 can potentially create. Encompasses all potential prompts and random seeds, it is immensely huge.
 
-Most people will explore the space by giving these models prompts - but this is only a tiny subset of the whole latent space. In this blog post I go about some ways to explore this space, and some of my early findings.
+Most people will explore the space by giving these models prompts - but this is only a tiny subset of the whole latent space, there is a lot more out there, and some of it is pretty whacky. In this blog post I go about some ways to explore this space, and some of my early findings.
 
 ## Context
 
