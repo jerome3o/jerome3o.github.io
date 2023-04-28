@@ -20,3 +20,8 @@ We were trying to really test out what GPT-3 could work with, so some of these a
 * Horny Karl Marx
 
 And many others that came and went.
+
+## Setup
+
+* TODO: Link to repo
+* TODO: Tidy up the repo with a readme etc
