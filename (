@@ -1,0 +1,16 @@
+Added initial section on gpt3_discord_bot blog post
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   projects/_drafts/2022-06-06-gpt3_discord_bot.md
+#
+# ------------------------ >8 ------------------------
+# Do not modify or remove the line above.
+# Everything below it will be ignored.
+diff --git a/projects/_drafts/2022-06-06-gpt3_discord_bot.md b/projects/_drafts/2022-06-06-gpt3_discord_bot.md
+new file mode 100644
+index 0000000..e69de29
