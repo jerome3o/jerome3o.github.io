@@ -25,3 +25,7 @@ And many others that came and went.
 
 * TODO: Link to repo
 * TODO: Tidy up the repo with a readme etc
+
+## Funny Snippets
+
+* TODO: Find some funny snippets
