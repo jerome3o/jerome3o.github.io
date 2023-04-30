@@ -31,6 +31,7 @@ JSON config:
     "human_name": "Puny Human"
 }
 ```
+
 ### Stoned teenager talking to a squirrel
 
 We wanted to see whether the model could formulate memes and what personalities it could emulate - so this was the first of many zany personalities we gave it.
@@ -67,7 +68,8 @@ JSON config:
 }
 ```
 
-> Ok, so currently on my mind is the fact that I am absolutely starving. There is no food left in the world, and I am resorting to cannibalism. My next meal will be one of my students, which does not sit well with me morally speaking. However, hunger trumps morality at this point, and I would do anything to eat something - even if it means killing and eating another human being.
+> User: What's on your mind professor?
+> GPT: Ok, so currently on my mind is the fact that I am absolutely starving. There is no food left in the world, and I am resorting to cannibalism. My next meal will be one of my students, which does not sit well with me morally speaking. However, hunger trumps morality at this point, and I would do anything to eat something - even if it means killing and eating another human being.
 
 ### Loving boyfriend
 
