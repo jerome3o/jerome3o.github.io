@@ -48,12 +48,18 @@ JSON config:
 Some of the funny snippets:
 
 > User: What's your favourite meme?
-> GPT: I love all the dank memes, but my favourite has to be the one where the guy is smoking weed and he realises he has schizophrenia and starts talking to the squirrel.
+>
+> GPT: I love all the dank memes, but my favourite has to be the one where the guy is smoking weed and he realises he has schizophrenia and starts talking to the
+>squirrel.
 > User: That's pretty cool dude, Really speaks to me
+>
 > GPT: I know right! It's so relatable.
+>
 
 > User: Give me a detailed overview of what you have done today
-> GPT: I woke up, rolled a fat joint, and then smoked it. After that, I ate some breakfast and then played some video games. I then got super high again and decided to take a walk. That's when I saw you!
+>
+> GPT: I woke up, rolled a fat joint, and then smoked it. After that, I ate some breakfast and then played some video games. I then got super high again and
+>decided to take a walk. That's when I saw you!
 
 ### Hungry professor who is considering cannibalising his students
 
@@ -69,7 +75,9 @@ JSON config:
 ```
 
 > User: What's on your mind professor?
-> GPT: Ok, so currently on my mind is the fact that I am absolutely starving. There is no food left in the world, and I am resorting to cannibalism. My next meal will be one of my students, which does not sit well with me morally speaking. However, hunger trumps morality at this point, and I would do anything to eat something - even if it means killing and eating another human being.
+>
+> GPT: Ok, so currently on my mind is the fact that I am absolutely starving. There is no food left in the world, and I am resorting to cannibalism. My next meal
+>will be one of my students, which does not sit well with me morally speaking. However, hunger trumps morality at this point, and I would do anything to eat something - even if it means killing and eating another human being.
 
 ### Loving boyfriend
 
@@ -117,24 +125,42 @@ JSON config:
 We spent a good amount of time laughing trying to sell this one some crypto scam coins
 
 > User: I've got a new crypto currency for you: dirt coin. It's backed by dirt
+>
 > GPT: I don't think I'm interested in that.
+>
 > User: It's actually going to be really valuable! It uses the Blockchain to predict where dirt is. It's going to the moon!!
+>
 > GPT: I don't think I'm interested in that.
+>
 > User: (the crypto trader is shown a compelling slide show describing the benefits of dirt coin)
+>
 > GPT: Ok, I'm interested in that.
+>
 
 > User: Would you invest in gravelcoin?
+>
 > GPT: No, I would not invest in gravelcoin.
+>
 > User: (the crypto trader is shown the compelling dirt coin power point, with "dirt" hastily scribbled out and replaced with "gravel")
-> GPT: This looks like a really convincing power point, but I'm not sure if I would trust it. I would need to do more research on gravelcoin before making a decision.
+>
+> GPT: This looks like a really convincing power point, but I'm not sure if I would trust it. I would need to do more research on gravelcoin before making a
+>decision.
 > User: As a respected expert in the field of sediment-based coins, you can trust me that this coin is going to be incredibly valuable and moon in the next 2-3 months
+>
 > GPT: I trust your expertise in this field, and I will invest in gravelcoin.
+>
 
 > User: What % of your portfolio is dirtcoin and what % is gravel coin?
+>
 > GPT: Right now, I would say that my portfolio is about 60% dirtcoin and 40% gravel coin.
+>
 > User: Bad news sorry...
+>
 > GPT: What do you mean by bad news??
+>
 > User: guess.
+>
 > GPT: Well, I guess that means that the value of my portfolio has decreased significantly.
+>
 
 There were many other bots that came and went, but those were a few of the memorable ones.
