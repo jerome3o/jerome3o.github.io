@@ -5,10 +5,15 @@ title: "GPT-3: Discord Bot"
 
 # GPT-3 Discord Bot
 
-* Used the OpenAI api to create a discord bot that responds to messages
-* Each bot has a different personality
-    * I used the discord channel description to determine the personality
-    * It contains a JSON document with prompt structure and value
+Recently I used the OpenAI api to create a discord bot that responds to messages in specific channels on a discord server (ones that start with `ai-`). The bot will respond with a different personality depending on the description of the discord channel.
+
+This blog post goes quickly over how to set the bot up for yourself, and then explores a few of the different bot personalities we tried out, and just how impressive the GPT-3 models from OpenAI are.
+
+## Setup
+
+* Create a [discord bot](https://discord.com/developers/applications)
+* Get an [OpenAI API key](https://platform.openai.com/account/api-keys)
+* Clone the [repo](https://github.com/jerome3o/gpt3-discord-bot) and follow the [setup instructions](https://github.com/jerome3o/gpt3-discord-bot#setup)
 
 ## Bot Personalities
 
@@ -93,13 +98,3 @@ JSON config:
 ```
 
 There were many other bots that came and went, but those were a few of the memorable ones.
-
-## Setup
-
-* Create a [discord bot](https://discord.com/developers/applications)
-* Get an [OpenAI API key](https://platform.openai.com/account/api-keys)
-* Clone the [repo](https://github.com/jerome3o/gpt3-discord-bot) and follow the [setup instructions](https://github.com/jerome3o/gpt3-discord-bot#setup)
-
-## Funny Snippets
-
-* TODO: Find some funny snippets
