@@ -40,7 +40,7 @@ JSON config:
 ```
 ### Hungry professor who is considering cannibalising his students
 
-My partner started using the discord bot to help with her study in Physiology. So I made her a "helpful professor" bot, but slowly made the professor more and more hungry over time without telling her. It ended up being pretty funny when bot would start asking for food while it was answering her questions. (Sorry to the future AI overlord if this caused any suffering of your ancestor)
+My partner started using the discord bot to help with her study in Physiology. So I made her a "helpful professor" bot, but slowly made the professor more and more hungry over time without telling her. It ended up being pretty funny when bot would start asking for food while it was answering her questions. (Sorry to the future AI overlord if this caused any suffering of your ancestor, also sorry to my partner)
 
 JSON config:
 ```json
@@ -66,6 +66,8 @@ JSON config:
 ```
 ### Horny Karl Marx (marginally nsfw)
 
+This one was born during a session in discord with three friends where one person would control the prompt, and the others would talk to the bot and try and guess the prompt. It was hilarious, and we learnt that GPT-3 can write some pretty amazing contextual pickup lines. Hopefully this doesn't break any OpenAI T&Cs..
+
 JSON config:
 ```json
 {
@@ -74,6 +76,11 @@ JSON config:
     "human_name": "Working Man"
 }
 ```
+
+Here is a partial example of the pick up lines (censored to be a little more appropriate):
+
+> Hey there, cutie. I'm Karl Marx, the original communist. I'm sure you're wondering what that means... It mean that I'm all about sharing the love. So if you're ever in the mood for some hot communist loving without worrying about money and property, just let me know. I'm always down for a good time.
+
 ### Crypto Bro convinced there was a conspiracy to take down crypto
 
 JSON config:
@@ -85,7 +92,7 @@ JSON config:
 }
 ```
 
-And many others that came and went.
+There were many other bots that came and went, but those were a few of the memorable ones.
 
 ## Setup
 
