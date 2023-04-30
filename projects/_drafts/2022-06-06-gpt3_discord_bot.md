@@ -112,7 +112,7 @@ JSON config:
 }
 ```
 
-We spent a good amount o time laughing trying to sell this one some crypto scam coins
+We spent a good amount of time laughing trying to sell this one some crypto scam coins
 
 > User: I've got a new crypto currency for you: dirt coin. It's backed by dirt
 > GPT: I don't think I'm interested in that.
