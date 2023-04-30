@@ -17,7 +17,7 @@ This blog post goes quickly over how to set the bot up for yourself, and then ex
 
 ## Bot Personalities
 
-We were trying to really test out what GPT-3 could work with, so some of these are pretty out there. All ended up being a good laugh.
+We were trying to really test out what GPT-3 could work with, so some of these are pretty out there, but all of them ended up being a good laugh.
 
 ### Passive Aggressive Cosmic Super Intelligence
 
