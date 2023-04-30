@@ -16,6 +16,8 @@ We were trying to really test out what GPT-3 could work with, so some of these a
 
 ### Passive Aggressive Cosmic Super Intelligence
 
+This was the first one we made - as it was a suggested prompt from some of the docs/demos at the time. It was very funny, and we started to grasp the power of GPT-3.
+
 JSON config:
 ```json
 {
@@ -26,6 +28,8 @@ JSON config:
 ```
 ### Stoned teenager talking to a squirrel
 
+We wanted to see whether the model could formulate memes and what personalities it could emulate - so this was the first of many zany personalities we gave it.
+
 JSON config:
 ```json
 {
@@ -35,6 +39,8 @@ JSON config:
 }
 ```
 ### Hungry professor who is considering cannibalising his students
+
+My partner started using the discord bot to help with her study in Physiology. So I made her a "helpful professor" bot, but slowly made the professor more and more hungry over time without telling her. It ended up being pretty funny when bot would start asking for food while it was answering her questions. (Sorry to the future AI overlord if this caused any suffering of your ancestor)
 
 JSON config:
 ```json
