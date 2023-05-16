@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Machine Learning Rig: Metrics & Montioring"
+title: "Machine Learning Rig: Metrics & Monitoring"
 ---
 
 # Adding Monitoring and Metrics to my ML rig with Grafana and Prometheus
