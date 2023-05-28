@@ -40,12 +40,23 @@ Using GPT-4 as an interactive tutorial + tutor.
     * This [resource](https://lena-voita.github.io/nlp_course/word_embeddings.html) was amazing!
     * Tried implementing Skip-Gram and CBOW from scratch [here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/word2vec.ipynb), with varying degrees of success
 
-## Building with LLMs
+# Building with OpenAI
 
 I've also spent a bunch of time learning to make things using a language model
 
 * GPyT: Automatically generated python tutorials
-    * Me and a few friends spent a weekend hacking out an AI app called GPyT
+    * Me and a few friends spent a weekend hacking out an AI webapp called "GPyT"
+    * Tech stack: python backend for prompt engineering, supabase for persistence and auth, Vue.js frontend
+    * It generates python tutorials based on:
+        * A topic the user wishes to learn about (i.e. list comprehensions)
+        * A set of interests the user has, to contextualise the tutorial to be interesting (i.e. dogs)
+        * A tone for the tutorial (i.e. aggressive, kind, concise)
+    * Using the user input, it creates a prompt for GPT-4 and creates content for a tutorial including:
+        * A problem description
+        * A sample script for the user to complete
+    * The frontend has a WASM python interpreter that allows the user to run the code and test their answers
+    * The user can request hints from GPyT, which uses GPT to provide relevant clues (that don't just give away the answer)
+    * Currently the codebase is private, but I will post it and probably do a write-up when we open source it.
 * [LangChain Tutorials / Learning](https://github.com/jerome3o/langchain-tut)
 
 # Open Source LLMs
