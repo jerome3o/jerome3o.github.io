@@ -1,11 +1,4 @@
-    # "databricks/dolly-v2-3b",
-    # "databricks/dolly-v1-6b",
-    # "databricks/dolly-v2-7b",
-    # "databricks/dolly-v2-12b",
-    # "OpenAssistant/stablelm-7b-sft-v7-epoch-3",
-    "OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5",
-    "StabilityAI/stablelm-tuned-alpha-3b",
-    "StabilityAI/stablelm-tuned-alpha-7b",https://github.com/jerome3o/pytorch-tut/blob/master/llms/discord_bot.py---
+---
 layout: post
 title: "Machine Learning Rig: Learning the Basics, open source LLMs, and a hardware update"
 ---
