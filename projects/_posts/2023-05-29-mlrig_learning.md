@@ -3,7 +3,7 @@ layout: post
 title: "Machine Learning Rig: Human Learning"
 ---
 
-# Learning the Basics
+## Learning the Basics
 
 This blog post is a bit of a mixed bag, but it generally just covers what I've been up to on the machine learning rig for the last month or so, which can be summarised with "Human Learning". In my spare time over the last few months I've been non-stop reading and coding all things machine learning including things like building deep neural networks, training them, serving them, and using them to make neat apps. My goal is to have a real sci-fi level AI running locally, understand it completely, and leverage it to automate a bunch of boring things in my life.
 
@@ -11,7 +11,7 @@ Testament to the impact of LLMs, I've been using GPT-4 to help me build study pl
 
 Apologies for the mess! It's been a whirlwind of a time, my brain has been a knowledge sponge so it's near impossible for me to write it all out in a reasonable amount of time. But hey, if it's worth doing, it's worth doing badly - here are all the things I've been working on
 
-## Machine Learning Learning
+### Machine Learning Learning
 
 On the pure machine learning side of things I have been going over all of the "Hello world"-like projects for different aspects of deep learning. I've been using PyTorch for almost everything, running in jupyter notebooks hosted on the machine learning rig.
 
@@ -46,21 +46,21 @@ On the pure machine learning side of things I have been going over all of the "H
     * Tried implementing Skip-Gram and CBOW from scratch [here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/word2vec.ipynb), with varying degrees of success
 * Not pure machine learning, but I've also been keeping up to date with [LangChain](https://python.langchain.com/en/latest/index.html), notes/tutorial work [here](https://github.com/jerome3o/langchain-tut)
 
-# Building with Language Models
+## Building with Language Models
 
 I've also been learning to make applications that use LLMs. I am constantly thinking of different applications and cool things to make, it's just become a matter of having time to implement them!
 
-## GPyT: Automatically generated python tutorials
+### GPyT: Automatically generated python tutorials
 
 Me and a few friends spent a weekend hacking out an AI webapp called "GPyT", it was super fun to try use LLMs in anger. My main job was making the frontend, I've never really done any proper frontend work so there was a lot of non-LLM learning there (bundling a WASM compiled python interpreter and running user code in the browser!), but I also got a lot of exposed to prompt engineering. Here is a summary of the project, I'll likely do a dedicated blog post in the future:
 
-### Tech stack
+#### Tech stack
 * python backend for content generation
 * supabase for persistence and auth
 * Vue.js for the frontend
 * OpenAI's GPT-3.5 for the language model
 
-### Key features
+#### Key features
 * GPyT generates python tutorials based on:
     * A topic the user wishes to learn about (i.e. list comprehensions)
     * A set of interests the user has, to contextualise the tutorial to be interesting (i.e. dogs)
@@ -73,13 +73,13 @@ Me and a few friends spent a weekend hacking out an AI webapp called "GPyT", it 
 
 Currently the codebase is private, but I will post it soon as we plan to open source it.
 
-# Open Source LLMs
+## Open Source LLMs
 
 I've also been trying out different open source LLMs that I could run on my rig. I did a bit of research a while back on 12 or so different open source models, you can see my notes [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/README.md), the open source LLM community moves sooo fast! so it's almost definitely already out of date.
 
 I honed in on 3 of those models (dolly, StableLM, and OpenAssistant) and started trying to use them for projects.
 
-## Running Locally
+### Running Locally
 
 I attempted to wraggle my GPUs (2x RX6800s) to get some of these models running with int8 quantisation, several hours later (see my notes on issues [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/quantization/README.md)) I found that the gfx1030 architecture doesn't support int8 matrix multiplication
 
@@ -95,7 +95,7 @@ None the less, the show must go on. I would like to get inference running on my 
 
 After doing a bit of [research on GPU offering from different cloud providers](https://github.com/jerome3o/pytorch-tut/blob/master/cloud_gpus/README.md), I decided to rent out a VPS with an A10 GPU from Lambda Labs. My notes for setting up the VPS (once provisioned) are [here](https://github.com/jerome3o/pytorch-tut/blob/master/cloud_gpus/1_lambda_labs.md)
 
-## Benchmarking Models on an A10
+### Benchmarking Models on an A10
 
 I decided to dig a little deeper into 3 model families for a few different sizes each
 
@@ -115,13 +115,13 @@ I didn't run any common benchmarks on these models as those are presumably alrea
 
 I also put together my own janky benchmark, it contained a minimum effort set of benchmark questions generated by GPT-4. These had about 50 brief questions, about 40 long form questions requiring detailed answers, and 20 python coding questions. I ran the benchmark on each model with the intention of reading over the results manually if we decided to dig further into a model. The questions can be found [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/testing/benchmark_prompts.py), and the outputs [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/testing/run_benchmarks.py)
 
-### Findings
+#### Findings
 
 What I learnt through this exercise was the prevalence of hallucinations in smaller models. It was spectacular and hilarious watching these models completely fabricate some ridiculous things. It gave me some more understanding of the fundamental issues with language models - bigger models like GPT-4 also hallucinate, just their hallucinations are far more convincing.
 
 We found that the 7b parameter models were all comparable in "vibe check" performance, however I recall the StableLM models feeling the best.
 
-# Hardware Update: Welcome RTX4090
+## Hardware Update: Welcome RTX4090
 
 After the hassles with int8 quantisation on AMD gpus, and the inability to run a tonne of apps that required NVIDIA card (specifically [Tabby](https://github.com/TabbyML/tabby) and [FauxPilot](https://github.com/fauxpilot/fauxpilot)) I decided to pull the trigger on purchasing an NVIDIA GPU.
 
