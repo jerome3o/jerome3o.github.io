@@ -120,6 +120,16 @@ What I learnt through this exercise was the prevalence of hallucinations in smal
 
 We found that the 7b parameter models were all comparable in "vibe check" performance, however I recall the StableLM models feeling the best.
 
-# Hardware Update
+# Hardware Update: Welcome RTX4090
 
-Purchased an RTX 4090
+After the hassles with int8 quantisation on AMD gpus, and the inability to run a tonne of apps that required NVIDIA card (specifically [Tabby](https://github.com/TabbyML/tabby) and [FauxPilot](https://github.com/fauxpilot/fauxpilot)) I decided to pull the trigger on purchasing an NVIDIA GPU.
+
+I contemplated buying a bunch of older GPUs off trademe on the cheap, but ended up deciding to look into some high end consumer products like the RTX4080 and RTX4090 after reading Tim Dettmers amazing [blog post on GPUs for machine learning](https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/).
+
+After considering cost, performance, and complexity I decided to get an RTX4090 (the close alternative being two RTX4080s). I was able to set up the GPU with the correct drivers and CUDA with relative ease - and had Tabby running within an hour of plugging it in. Here are [the scripts](https://github.com/jerome3o/pytorch-tut/blob/master/setup/cuda.sh) I used to setup the machine.
+
+Here it is in all it's glory, plugged into the rig:
+
+![rtx4090](/projects/assets/mlrig_learning/rtx4090.jpg)
+
+And of course I got metrics and monitoring set up with my grafana/prometheus stack! This time there was a [well established exporter](https://github.com/utkuozdemir/nvidia_gpu_exporter/) that I could just plug in and play with (setup script [here](https://github.com/jerome3o/pytorch-tut/blob/master/setup/prom.sh))
