@@ -52,7 +52,7 @@ I've also been learning to make applications that use LLMs. I am constantly thin
 
 ### GPyT: Automatically generated python tutorials
 
-Me and a few friends spent a weekend hacking out an AI webapp called "GPyT", it was super fun to try use LLMs in anger. My main job was making the frontend, I've never really done any proper frontend work so there was a lot of non-LLM learning there (bundling a WASM compiled python interpreter and running user code in the browser!), but I also got a lot of exposed to prompt engineering. Here is a summary of the project, I'll likely do a dedicated blog post in the future:
+Me and a few friends spent a weekend hacking out an AI webapp called "GPyT", it was super fun to try use LLMs in anger. My main job was making the frontend, I've never really done any proper frontend work so there was a lot of non-LLM learning there (bundling a WASM compiled python interpreter and running user code in the browser!), but I also got a lot of exposure to prompt engineering. Here is a summary of the project, I'll likely do a dedicated blog post in the future:
 
 #### Tech stack
 * python backend for content generation
