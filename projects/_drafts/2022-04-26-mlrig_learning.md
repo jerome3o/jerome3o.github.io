@@ -1,19 +1,25 @@
 ---
 layout: post
-title: "Machine Learning Rig: Learning the Basics, open source LLMs, and a hardware update"
+title: "Machine Learning Rig: Human Learning"
 ---
 
 # Learning the Basics
 
-Using GPT-4 as an interactive tutorial + tutor.
+This blog post is a bit of a mixed bag, but it generally just covers what I've been up to on the machine learning rig for the last month or so, which can be summarised with "Human Learning". In my spare time over the last few months I've been non-stop reading and coding all things machine learning including things like building deep neural networks, training them, serving them, and using them to make neat apps. My goal is to have a real sci-fi level AI running locally, understand it completely, and leverage it to automate a bunch of boring things in my life.
 
-## Machine Learning
+Testament to the impact of LLMs, I've been using GPT-4 to help me build study plans, come up with cool learning projects, and generally help me code and set things up. Following in this post there is a bit of a brain dump of all the things I've been doing, with links to all the code and external resources/repositories I've been working with.
+
+Apologies for the mess! It's been a whirlwind of a time, my brain has been a knowledge sponge so it's near impossible for me to write it all out in a reasonable amount of time. But hey, if it's worth doing, it's worth doing badly - here are all the things I've been working on
+
+## Machine Learning Learning
+
+On the pure machine learning side of things I have been going over all of the "Hello world"-like projects for different aspects of deep learning. I've been using PyTorch for almost everything, running in jupyter notebooks hosted on the machine learning rig.
 
 * Simple Image classification with a CNN
-    * CIFAR10
-    * Notebook [here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/image_recognition/conv_net.ipynb)
+    * Using the CIFAR10 dataset (baby steps)
+    * Notebook [here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/image_recognition/conv_net.ipynb) for reference
 * Sentiment Analysis (with various NLP NNs)
-    * Used [IMDb Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews) of 50k reviews.
+    * Used [IMDb Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews) of 50k reviews (slightly bigger, still fits in RAM though)
     * Tried out several libraries / methods for pre-processing text for NLP ([my notebook here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/sentiment_analysis/1_1_pre_processing_learning.ipynb))
         * [NLTK](https://www.nltk.org/)
         * [spaCy](https://spacy.io/)
@@ -27,8 +33,7 @@ Using GPT-4 as an interactive tutorial + tutor.
         * [LSTM](https://github.com/jerome3o/pytorch-tut/blob/master/tut/sentiment_analysis/2_2_lstm.ipynb)
         * [GRU](https://github.com/jerome3o/pytorch-tut/blob/master/tut/sentiment_analysis/2_3_gru.ipynb)
         * Using pretrained models (GPT, BERT, RoBERTa) - WIP this is next on the Sentiment Analysis thread
-            * Haven't completed this yet, as I think I already understand how you'd do this
-
+            * Haven't completed this yet, as I think I already understand how you'd do this, so it's further down the effort to learning ratio.
 * Trained a [GPT model from scratch](https://github.com/jerome3o/gpt_from_scratch/blob/master/tutorial/main.py) (following Andrej Karpathy's awesome [youtube video](https://www.youtube.com/watch?v=kCc8FmEb1nY)) on shakespeare data
 * Fine-tuned GPT2-large on my facebook messages
     * Used nanoGPT and added my own [data source]([data preparation here](https://github.com/jerome3o/nanoGPT/blob/master/data/facebook/prepare.py))
@@ -39,37 +44,40 @@ Using GPT-4 as an interactive tutorial + tutor.
 * Went on a deep dive into Word2Vec, and embeddings in general
     * This [resource](https://lena-voita.github.io/nlp_course/word_embeddings.html) was amazing!
     * Tried implementing Skip-Gram and CBOW from scratch [here](https://github.com/jerome3o/pytorch-tut/blob/master/tut/word2vec.ipynb), with varying degrees of success
+* Not pure machine learning, but I've also been keeping up to date with [LangChain](https://python.langchain.com/en/latest/index.html), notes/tutorial work [here](https://github.com/jerome3o/langchain-tut)
 
 # Building with Language Models
 
-I've also spent a bunch of time learning to actually make things using LLMs. Here
+I've also been learning to make applications that use LLMs. I am constantly thinking of different applications and cool things to make, it's just become a matter of having time to implement them!
 
 ## GPyT: Automatically generated python tutorials
 
-* Me and a few friends spent a weekend hacking out an AI webapp called "GPyT"
-* Tech stack: python backend for prompt engineering, supabase for persistence and auth, Vue.js frontend
-* It generates python tutorials based on:
+Me and a few friends spent a weekend hacking out an AI webapp called "GPyT", it was super fun to try use LLMs in anger. My main job was making the frontend, I've never really done any proper frontend work so there was a lot of non-LLM learning there (bundling a WASM compiled python interpreter and running user code in the browser!), but I also got a lot of exposed to prompt engineering. Here is a summary of the project, I'll likely do a dedicated blog post in the future:
+
+### Tech stack
+* python backend for content generation
+* supabase for persistence and auth
+* Vue.js for the frontend
+* OpenAI's GPT-3.5 for the language model
+
+### Key features
+* GPyT generates python tutorials based on:
     * A topic the user wishes to learn about (i.e. list comprehensions)
     * A set of interests the user has, to contextualise the tutorial to be interesting (i.e. dogs)
     * A tone for the tutorial (i.e. aggressive, kind, concise)
-* Using the user input, it creates a prompt for GPT-4 and creates content for a tutorial including:
+* Using the user input, it creates a prompt for GPT-3.5 and creates content for a tutorial including:
     * A problem description
     * A sample script for the user to complete
 * The frontend has a WASM python interpreter that allows the user to run the code and test their answers
 * The user can request hints from GPyT, which uses GPT to provide relevant clues (that don't just give away the answer)
-* Currently the codebase is private, but I will post it and probably do a write-up when we open source it.
 
-## Tutorials / Other Learning
-
-I've also been keeping up do date with popular LLM libraries - mainly LangChain
-
-* [LangChain Tutorials / Learning](https://github.com/jerome3o/langchain-tut)
+Currently the codebase is private, but I will post it soon as we plan to open source it.
 
 # Open Source LLMs
 
-I also spent a fair amount of time trying out different open source LLMs that I could run on my rig.
+I've also been trying out different open source LLMs that I could run on my rig. I did a bit of research a while back on 12 or so different open source models, you can see my notes [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/README.md), the open source LLM community moves sooo fast! so it's almost definitely already out of date.
 
-I did a quick read up on 12 or so different models, notes are [here](https://github.com/jerome3o/pytorch-tut/blob/master/llms/README.md).
+I honed in on 3 of those models (dolly, StableLM, and OpenAssistant) and started trying to use them for projects.
 
 ## Running Locally
 
@@ -125,4 +133,6 @@ Here it is in all it's glory, plugged into the rig:
 
 ![rtx4090](/projects/assets/mlrig_learning/rtx4090.jpg)
 
-And of course I got metrics and monitoring set up with my grafana/prometheus stack! This time there was a [well established exporter](https://github.com/utkuozdemir/nvidia_gpu_exporter/) that I could just plug in and play with (setup script [here](https://github.com/jerome3o/pytorch-tut/blob/master/setup/prom.sh))
+And of course I got metrics and monitoring set up with my grafana/prometheus stack! This time there was a [well established exporter](https://github.com/utkuozdemir/nvidia_gpu_exporter/) that I could just plug in and play with (setup script [here](https://github.com/jerome3o/pytorch-tut/blob/master/setup/prom.sh)). Here is the pre-made dashboard in grafana, looking as good as ever:
+
+![dashboard](/projects/assets/mlrig_learning/dashboard.png)
