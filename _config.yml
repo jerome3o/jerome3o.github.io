@@ -11,6 +11,7 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-analytics
 
 collections:
   - books
@@ -27,3 +28,10 @@ collections:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+
+# Other configuration settings
+analytics:
+  provider: google
+  google:
+    tracking_id: G-CN46CDLGFM
