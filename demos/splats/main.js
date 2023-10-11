@@ -339,16 +339,16 @@ function createWorker(self) {
 
 		// This is a 16 bit single-pass counting sort
 		let depthInv = (256 * 256) / (maxDepth - minDepth);
-		let counts0 = new Uint32Array(256*256);
+		let counts0 = new Uint32Array(256 * 256);
 		for (let i = 0; i < vertexCount; i++) {
 			sizeList[i] = ((sizeList[i] - minDepth) * depthInv) | 0;
 			counts0[sizeList[i]]++;
 		}
-		let starts0 = new Uint32Array(256*256);
-		for (let i = 1; i < 256*256; i++) starts0[i] = starts0[i - 1] + counts0[i - 1];
+		let starts0 = new Uint32Array(256 * 256);
+		for (let i = 1; i < 256 * 256; i++) starts0[i] = starts0[i - 1] + counts0[i - 1];
 		depthIndex = new Uint32Array(vertexCount);
 		for (let i = 0; i < vertexCount; i++) depthIndex[starts0[sizeList[i]]++] = i;
-		
+
 
 		lastProj = viewProj;
 		// console.timeEnd("sort");
@@ -520,9 +520,9 @@ function createWorker(self) {
 			if (types["scale_0"]) {
 				const qlen = Math.sqrt(
 					attrs.rot_0 ** 2 +
-						attrs.rot_1 ** 2 +
-						attrs.rot_2 ** 2 +
-						attrs.rot_3 ** 2,
+					attrs.rot_1 ** 2 +
+					attrs.rot_2 ** 2 +
+					attrs.rot_3 ** 2,
 				);
 
 				rot[0] = (attrs.rot_0 / qlen) * 128 + 128;
@@ -638,21 +638,21 @@ const vertexShaderSource = `
     }
 
     mat3 Vrk = mat3(
-        covA.x, covA.y, covA.z, 
+        covA.x, covA.y, covA.z,
         covA.y, covB.x, covB.y,
         covA.z, covB.y, covB.z
     );
-	
+
     mat3 J = mat3(
-        focal.x / camspace.z, 0., -(focal.x * camspace.x) / (camspace.z * camspace.z), 
-        0., -focal.y / camspace.z, (focal.y * camspace.y) / (camspace.z * camspace.z), 
+        focal.x / camspace.z, 0., -(focal.x * camspace.x) / (camspace.z * camspace.z),
+        0., -focal.y / camspace.z, (focal.y * camspace.y) / (camspace.z * camspace.z),
         0., 0., 0.
     );
 
     mat3 W = transpose(mat3(view));
     mat3 T = W * J;
     mat3 cov = transpose(T) * Vrk * T;
-    
+
     vec2 vCenter = vec2(pos2d) / pos2d.w;
 
     float diagonal1 = cov[0][0] + 0.3;
@@ -672,8 +672,8 @@ const vertexShaderSource = `
     vPosition = position;
 
     gl_Position = vec4(
-        vCenter 
-            + position.x * v1 / viewport * 2.0 
+        vCenter
+            + position.x * v1 / viewport * 2.0
             + position.y * v2 / viewport * 2.0, 0.0, 1.0);
 
   }
@@ -685,7 +685,7 @@ precision mediump float;
   varying vec4 vColor;
   varying vec2 vPosition;
 
-  void main () {    
+  void main () {
 	  float A = -dot(vPosition, vPosition);
     if (A < -4.0) discard;
     float B = exp(A) * vColor.a;
@@ -705,12 +705,12 @@ async function main() {
 	try {
 		viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
 		carousel = false;
-	} catch (err) {}
+	} catch (err) { }
 	const url = new URL(
 		// "nike.splat",
 		// location.href,
-		params.get("url") || "train.splat",
-		"https://huggingface.co/cakewalk/splat-data/resolve/main/",
+		params.get("url") || "data/cherry_one.splat",
+		location,
 	);
 	const req = await fetch(url, {
 		mode: "cors", // no-cors, *cors, same-origin
@@ -928,8 +928,8 @@ async function main() {
 				e.deltaMode == 1
 					? lineHeight
 					: e.deltaMode == 2
-					? innerHeight
-					: 1;
+						? innerHeight
+						: 1;
 			let inv = invert4(viewMatrix);
 			if (e.shiftKey) {
 				inv = translate4(
@@ -1169,8 +1169,8 @@ async function main() {
 				activeKeys.includes("j")
 					? -0.05
 					: activeKeys.includes("l")
-					? 0.05
-					: 0,
+						? 0.05
+						: 0,
 				0,
 				1,
 				0,
@@ -1180,8 +1180,8 @@ async function main() {
 				activeKeys.includes("i")
 					? 0.05
 					: activeKeys.includes("k")
-					? -0.05
-					: 0,
+						? -0.05
+						: 0,
 				1,
 				0,
 				0,
@@ -1289,7 +1289,7 @@ async function main() {
 		try {
 			viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
 			carousel = false;
-		} catch (err) {}
+		} catch (err) { }
 	});
 
 	const preventDefault = (e) => {
@@ -1307,8 +1307,8 @@ async function main() {
 
 	window.addEventListener('resize', (e) => {
 		const canvas = document.getElementById("canvas");
-    	canvas.width = innerWidth / activeDownsample;
-    	canvas.height = innerHeight / activeDownsample;
+		canvas.width = innerWidth / activeDownsample;
+		canvas.height = innerHeight / activeDownsample;
 	})
 
 	let bytesRead = 0;
