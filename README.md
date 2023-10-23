@@ -6,6 +6,20 @@ The code for jeromeswannack.com, using Jekyll
 
 * Jekyll
 
+### Docker
+
+```sh
+sudo docker run -it --rm -p 4000:4000 -v $(pwd):/site/ ruby:2.7.4-slim-buster bash
+```
+
+```sh
+cd /site
+apt update
+apt install -y ruby-dev gcc libffi-dev make build-essential
+bundle install
+bundle exec jekyll serve --host 0.0.0.0
+```
+
 ### Setup
 
 ```bash
@@ -20,7 +34,7 @@ gem install jekyll bundler
 bundle install  # ???
 ```
 
-### Serve locally 
+### Serve locally
 
 ```bash
 bundle exec jekyll serve
