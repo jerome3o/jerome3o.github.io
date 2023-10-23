@@ -1,5 +1,5 @@
 ---
-layout: custom_post
+layout: post
 title: "Throwing Exceptions: Clay 3D Printing"
 ---
 
