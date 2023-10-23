@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: custom_post
 title: "Machine Learning Rig: Metrics & Monitoring"
 ---
 
@@ -63,7 +63,7 @@ Now that grafana and prometheus are running, I need to get metrics from my machi
 
 Seeing as I have a bunch of machines I want to monitor, I decided to use [Ansible](https://www.ansible.com/) to install node-exporter on all of them. It probably took me just as long to learn Ansible as it would have to install node-exporter on all my machines manually, but it was a fun learning experience and it may come in handy in future if I need to set up a bunch of machines.
 
-I set up an Ansible [repo](https://github.com/jerome3o/ansible-jerome) with an [inventory](https://github.com/jerome3o/ansible-jerome/blob/main/inventory.yaml) of all my machines, and a [playbook](https://github.com/jerome3o/ansible-jerome/blob/main/playbooks/node-exporter.yaml) to install node-exporter. 
+I set up an Ansible [repo](https://github.com/jerome3o/ansible-jerome) with an [inventory](https://github.com/jerome3o/ansible-jerome/blob/main/inventory.yaml) of all my machines, and a [playbook](https://github.com/jerome3o/ansible-jerome/blob/main/playbooks/node-exporter.yaml) to install node-exporter.
 
 I also set up a vault and put all the sensitive data (passwords, ssh keys, ip addresses etc) in it, allowing full configuration as code.
 
@@ -82,7 +82,7 @@ And voila, node-exporter was installed on all my machines. Magic!
 
 ### Custom ROCm Prometheus Metrics Exporter
 
-This is good and all, but I still need to get metrics from my GPUs. I couldn't find any easy out of the box prometheus clients for AMD GPUs, so I decided to write my own. 
+This is good and all, but I still need to get metrics from my GPUs. I couldn't find any easy out of the box prometheus clients for AMD GPUs, so I decided to write my own.
 
 I wrote a quick wrapper on top of the [rocm-smi](https://docs.amd.com/bundle/ROCm-System-Management-Interface-Guide/page/ROCm-SMI-CLI.html) cli in python (my native tounge) and used the [prometheus python client](https://github.com/prometheus/client_python) to expose the metrics. I then set up a [systemd unit](https://github.com/jerome3o/rocm-prom-metrics/blob/master/rocm-prom-metrics.service) to run it on boot.
 
@@ -95,7 +95,7 @@ Now that I have metrics being exposed on all my machines (including the GPU spec
 
 ## Final Result
 
-After all that, I put together two Grafana dashboards with all the metrics I want, one for the ML Rig, and another for all my other machines. 
+After all that, I put together two Grafana dashboards with all the metrics I want, one for the ML Rig, and another for all my other machines.
 
 I can see the GPU usage, temperature, power usage, and CPU/GPU/RAM usage of the ML rig. I can also see the CPU/GPU/RAM usage of my 3 raspberry pi's, server, 2 laptops, and me and my partner's PCs. Looking very nice 👌👌
 

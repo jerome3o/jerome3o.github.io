@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: custom_post
 title: "Machine Learning Rig: Human Learning"
 ---
 

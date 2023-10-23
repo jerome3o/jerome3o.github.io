@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: custom_post
 title: "Stable Diffusion: Latent Exploration"
 ---
 

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: custom_post
 title: "GPT-3: Discord Bot"
 ---
 
