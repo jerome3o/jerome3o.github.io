@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting Up Userspace Package Management on Steam Deck"
+title: "Steam Deck hacking: Setting up user space pacman"
 ---
 
 # Setting Up Userspace Package Management on Steam Deck
