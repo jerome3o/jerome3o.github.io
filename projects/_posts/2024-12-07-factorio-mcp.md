@@ -8,7 +8,7 @@ date: 2024-12-07
 
 Over the last year I've been working as a software engineer at [Anthropic](https://www.anthropic.com/) building out features for claude.ai. One of my favourite things we've built is the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) - it basically allows anyone to build their own integrations to claude.ai. I've also been playing Factorio Space Age on my Steam Deck lately, and I couldn't resist creating an MCP server that allows claude to make JIT mods (and do general admin-y stuff) for my factorio server.
 
-{% include youtube.html id="53-SPxNpQg4" %}
+<iframe width="100%" height="495" src="https://www.youtube.com/embed/53-SPxNpQg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 In this video, you can watch me having a laugh with it - building stuff around my character, giving items, adding silly little mods, etc.
 
@@ -45,7 +45,7 @@ graph LR
 The most interesting discovery from this project wasn't the ability to get Claude to give me items or teleport me around (though that was fun). It's the realization that Claude can essentially create "Just-In-Time mods" using Factorio's Lua API.
 
 Here's an example of a mod that claude made (I don't actually know lua) that makes bugs appear near my character ever 5 seconds:
-
+{% raw %}
 ```lua
 -- Script to spawn biters near player "jermoe" every 5 seconds
 
@@ -89,6 +89,7 @@ script.on_event(defines.events.on_tick, function(event)
     end
 end)
 ```
+{% endraw %}
 
 Claude wrote this code on the fly, understanding both:
 1. The basics of the Factorio Lua API and modding ecosystem
@@ -103,6 +104,7 @@ It's not just executing pre-written commands - it's actually programming custom 
 
 The implementation using FastMCP is very clean. Here's a key example showing how we expose Lua execution to Claude (assuming we have the `send_message` and `run_lua` commands wired up to hit the http backend):
 
+{% raw %}
 ```python
 @mcp.tool()
 def run_lua(code: str, explanation: Optional[str] = None) -> str:
@@ -117,10 +119,11 @@ def run_lua(code: str, explanation: Optional[str] = None) -> str:
 def give_items(player: str, item: str, count: int = 1) -> str:
     """Give items to a player"""
     return run_lua(
-        f'game.players["{player}"].insert{{name="{item}", count={count}}}',
+        f'game.players["{player}"].insert{{ {{"name="{item}", count={count}}} }}',
         f"Giving {count}x {item} to {player}"
     )
 ```
+{% endraw %}
 
 The `explanation` parameter is neat - it makes Claude announce what it's about to do, giving players a heads-up before random things start happening around them in the server
 
