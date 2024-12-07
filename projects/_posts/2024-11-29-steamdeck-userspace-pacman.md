@@ -17,13 +17,15 @@ Today I'll cover:
 
 ## The Motivation
 
-I've been working on setting up my [dotfiles](https://github.com/jerome3o/dotfiles) on my Steam Deck, which require GNU stow for management. However, the Steam Deck uses an immutable root filesystem with A/B partitioning for updates, meaning any system-level package installations get wiped when the system updates.
+I've been hacking around on my Steam Deck (as you do), with the vague goal of trying to get some cool speech to text using [Deepgram](https://deepgram.com/) while gaming so I don't have to type stuff on the deck. Anyway - the first thing I needed to get working was my [dotfiles](https://github.com/jerome3o/dotfiles), which require GNU [stow](https://www.gnu.org/software/stow/) for management (I don't really need this, but I love a good [yak shave](https://seths.blog/2005/03/dont_shave_that/)). However, the Steam Deck uses an immutable root filesystem with A/B partitioning for updates, meaning any system-level package installations get wiped when the system updates. TL;DR this means any package I install with [pacman](https://wiki.archlinux.org/title/Pacman) (the steam deck runs [SteamOS](https://store.steampowered.com/steamos), based on arch) will get wiped on updates to the deck.
+
+This is no good, because I don't want to have to re-setup my dev environment on every update...
 
 ## The Solution
 
 I found this excellent blog post by etaoin.sh about [installing pacman packages in userspace](https://etaoin.sh/posts/m9g%20userspace%20pacman.html) on Steam Deck. The post describes using pacman's `-r` option to install packages to an alternate root directory, allowing installations to persist across system updates.
 
-However, I ran into several issues while following the tutorial, particularly around package signing and Perl module paths. [Claude](https://claude.ai) was incredibly helpful in debugging these issues and helped me create a script to automate the entire setup process.
+However, I ran into several issues while following the tutorial, and even once I had pacman working, I still had issues with stow specifically (around package signing and Perl module paths). [Claude](https://claude.ai) was incredibly helpful in debugging these issues and helped me create a script to automate the entire setup process. Following is a setup script for pacman on Steam Deck, written by Claude ([YMMV](https://dictionary.cambridge.org/dictionary/english/ymmv)) that configures pacman to install packages in userspace (specifically in `~/.root/`), sets up an alias `pacman_` that you should use to install stuff thereafter. It also set up some environment variables for perl, I suspect there will be a long tail of other issues here - I recommend copying this whole post (along with [etaoin's post](https://etaoin.sh/posts/m9g%20userspace%20pacman.html)) into claude.ai along with your errors and ask for a fix to your specific problem.
 
 ## The Setup Script
 
@@ -127,7 +129,7 @@ log "3. Verify stow works with 'stow -h'"
 # - Pacman configuration and keyring
 # - Required device nodes and directories
 # - Environment variables and aliases in .bashrc
-# 
+#
 # You can now install packages with 'pacman_' and they will persist
 # across Steam Deck system updates.
 ```
@@ -191,6 +193,6 @@ This setup provides a nice solution for persistent package management on Steam D
 Big thanks to:
 * etaoin.sh for the original tutorial
 * The SteamOS team for building on Arch Linux, making this possible
-* [Claude](https://claude.ai) for helping debug issues and actually writing this blog post! 😄
+* [Claude](https://claude.ai) for helping debug issues and writing a good chunk of this blog post! 😄
 
-The full script is available above - feel free to adapt it for your needs. If you run into issues or have improvements to suggest, let me know!
+The full script is available above - feel free to adapt it for your needs. If you run into issues or have improvements to suggest, [let me know](https://github.com/jerome3o)!
