@@ -3,7 +3,7 @@ layout: post
 title: "Steam Deck hacking: Setting up user space pacman"
 ---
 
-# Setting Up Userspace Package Management on Steam Deck
+# Setting up user space package management on the Steam Deck
 
 November 29, 2024
 
@@ -17,7 +17,7 @@ Today I'll cover:
 
 ## The Motivation
 
-I've been hacking around on my Steam Deck (as you do), with the vague goal of trying to get some cool speech to text using [Deepgram](https://deepgram.com/) while gaming so I don't have to type stuff on the deck. Anyway - the first thing I needed to get working was my [dotfiles](https://github.com/jerome3o/dotfiles), which require GNU [stow](https://www.gnu.org/software/stow/) for management (I don't really need this, but I love a good [yak shave](https://seths.blog/2005/03/dont_shave_that/)). However, the Steam Deck uses an immutable root filesystem with A/B partitioning for updates, meaning any system-level package installations get wiped when the system updates. TL;DR this means any package I install with [pacman](https://wiki.archlinux.org/title/Pacman) (the steam deck runs [SteamOS](https://store.steampowered.com/steamos), based on arch) will get wiped on updates to the deck.
+I've been hacking around on my Steam Deck (as you do), with the vague goal of trying to get some good speech to text functionality using [Deepgram](https://deepgram.com/) while gaming so I don't have to type stuff on the deck. Anyway - the first thing I needed to get working was my [dotfiles](https://github.com/jerome3o/dotfiles), which require GNU [stow](https://www.gnu.org/software/stow/) for management (I don't really need my dotfiles, let alone stow, but I love a good [yak shave](https://seths.blog/2005/03/dont_shave_that/)). However, the Steam Deck uses an root filesystem with A/B partitioning for updates, meaning any system-level package installations get wiped when the system updates. TL;DR this means any package I install with [pacman](https://wiki.archlinux.org/title/Pacman) (the steam deck runs [SteamOS](https://store.steampowered.com/steamos), based on arch) will get wiped on updates to the deck.
 
 This is no good, because I don't want to have to re-setup my dev environment on every update...
 
