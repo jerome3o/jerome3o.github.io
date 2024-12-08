@@ -4,9 +4,9 @@ title: "MCP: Claude as a factorio sysadmin"
 date: 2024-12-07
 ---
 
-## When AI Meets Factory Automation
+## Context
 
-Over the last year I've been working as a software engineer at [Anthropic](https://www.anthropic.com/) building out features for claude.ai. One of my favourite things we've built is the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) - it basically allows anyone to build their own integrations to claude.ai. I've also been playing Factorio Space Age on my Steam Deck lately, and I couldn't resist creating an MCP server that allows claude to make JIT mods (and do general admin-y stuff) for my factorio server.
+Over the last year I've been working at [Anthropic](https://www.anthropic.com/) building out features for [claude.ai](https://claude.ai/) (amongst other things). One of my favourite things that we've built recently is the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) - basically allowing anyone to build their own integrations to claude.ai. I've also been playing Factorio Space Age on my Steam Deck lately, and I couldn't resist creating an MCP server that allows claude to make Just In Time (JIT) mods (and do general admin-y stuff) for my factorio server.
 
 <iframe width="100%" height="495" src="https://www.youtube.com/embed/53-SPxNpQg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -25,13 +25,11 @@ The protocol establishes a clear interface for AI models to:
 
 The system consists of three main components:
 
-```
 ```mermaid
 graph LR
     Claude --> MCP_API
     MCP_API --> HTTP_Backend
     HTTP_Backend --> Factorio
-```
 ```
 
 1. **The MCP Server**: Built with [FastMCP](https://github.com/jlowin/fastmcp), this provides Claude with a high-level interface to interact with Factorio. It translates Claude's intentions into game commands.
