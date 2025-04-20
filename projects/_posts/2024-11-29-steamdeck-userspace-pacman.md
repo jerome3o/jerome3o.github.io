@@ -92,6 +92,7 @@ log "Initializing pacman keyring..."
 mkdir -p "$GPG_DIR"
 sudo pacman-key --gpgdir "$GPG_DIR" --init
 sudo pacman-key --gpgdir "$GPG_DIR" --populate archlinux
+sudo pacman-key --gpgdir "$GPG_DIR" --populate holo
 
 # Import and sign SteamOS keys
 log "Importing SteamOS keys..."
@@ -105,7 +106,7 @@ export USERROOT=\"$USERROOT\"
 export PATH=\"\$PATH:\$USERROOT/usr/bin\"
 export LD_LIBRARY_PATH=\"\$LD_LIBRARY_PATH:\$USERROOT/lib:\$USERROOT/lib64\"
 export PERL5LIB=\"\$USERROOT/usr/share/perl5/vendor_perl:\$USERROOT/usr/lib/perl5/5.38/vendor_perl:\$USERROOT/usr/share/perl5/core_perl:\$USERROOT/usr/lib/perl5/5.38/core_perl\"
-alias pacman_='sudo pacman -r \$USERROOT --config \$USERROOT/etc/pacman.conf --gpgdir \$USERROOT/etc/pacman.d/gnupg'
+alias pacman_='sudo pacman -r \$USERROOT --config \$USERROOT/etc/pacman.conf --gpgdir \$USERROOT/etc/pacman.d/gnupg --dbpath \$USERROOT/var/lib/pacman --cachedir \$USERROOT/var/cache/pacman/pkg'
 "
 
 # Add environment setup to .bashrc if not already present
