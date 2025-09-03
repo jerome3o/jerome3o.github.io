@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Quick Look at Your Values - Assessment Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .instructions {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .instructions p {
+            margin-bottom: 15px;
+        }
+
+        .instructions strong {
+            color: #667eea;
+        }
+
+        .values-grid {
+            margin-bottom: 30px;
+        }
+
+        .value-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .value-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-content {
+            flex: 1;
+        }
+
+        .value-header {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .value-number {
+            color: #667eea;
+            font-weight: bold;
+            min-width: 35px;
+        }
+
+        .value-name {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .value-description {
+            color: #666;
+            font-size: 0.85rem;
+            margin-left: 35px;
+        }
+
+        .rating-buttons {
+            display: flex;
+            gap: 6px;
+            margin-left: 15px;
+        }
+
+        .rating-btn {
+            padding: 6px 12px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 45px;
+            font-size: 0.9rem;
+        }
+
+        .rating-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating-btn.very {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        .rating-btn.very.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .rating-btn.quite {
+            color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .rating-btn.quite.active {
+            background: #ffc107;
+            color: white;
+        }
+
+        .rating-btn.not {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .rating-btn.not.active {
+            background: #dc3545;
+            color: white;
+        }
+
+        .top-six-selector {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .top-six-selector h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .top-six-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .top-six-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .top-six-item:hover {
+            border-color: #667eea;
+        }
+
+        .top-six-item.selected {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .top-six-item.selected::after {
+            content: " ✓";
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .domains-section {
+            margin-top: 50px;
+        }
+
+        .domains-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .domain-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .domain-card h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .domain-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .actions {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .progress-indicator {
+            background: #e9ecef;
+            height: 4px;
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .custom-values {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .custom-values h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .values-worksheet-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .worksheet-question {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .worksheet-question h4 {
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .worksheet-question p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .worksheet-question textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .worksheet-question textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .rating-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .rating-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .rating-table th small {
+            display: block;
+            font-weight: normal;
+            opacity: 0.9;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+
+        .rating-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: middle;
+        }
+
+        .rating-table td:first-child {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+            min-width: 150px;
+        }
+
+        .rating-table input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+
+        .rating-table input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .rating-table input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .bullseye-container {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .bullseye-values {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .bullseye-value-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .bullseye-value-section h4 {
+            color: #667eea;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .bullseye-value-section p {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .bullseye-value-section textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .bullseye-value-section textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .dartboard-section {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+
+        .dartboard-section h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .dartboard-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .dartboard {
+            max-width: 100%;
+            height: auto;
+            cursor: crosshair;
+        }
+
+        .quadrant:hover {
+            fill: rgba(102, 126, 234, 0.1);
+        }
+
+        .dartboard-marker {
+            fill: #dc3545;
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        .dartboard-status {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .dartboard-status p {
+            margin-bottom: 10px;
+        }
+
+        .status-item {
+            background: white;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+        }
+
+        .smart-goals-info {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .smart-goals-info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .smart-goals-info ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        .smart-goals-info li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .goals-section {
+            margin-top: 30px;
+        }
+
+        .goals-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .goal-category {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .goal-category h4 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .goal-category p {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .goal-category textarea {
+            width: 100%;
+            min-height: 70px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .goal-category textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .value-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .rating-buttons {
+                margin-left: 0;
+                align-self: flex-end;
+            }
+            
+            .bullseye-container {
+                flex-direction: column;
+            }
+            
+            .rating-table-container {
+                overflow-x: auto;
+            }
+            
+            .rating-table th,
+            .rating-table td {
+                padding: 8px 4px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>A Quick Look at Your Values</h1>
+            <p>Discover what matters most to you and set meaningful goals</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="instructions">
+                    <p><strong>Values are your heart's deepest desires for how you want to behave as a human being.</strong> Values are not about what you want to get or achieve; they are about how you want to behave or act on an ongoing basis.</p>
+                    
+                    <p>There are literally hundreds of different values, but below you'll find a list of the most common ones. Probably, not all of them will be relevant to you. Keep in mind there are no such things as 'right values' or 'wrong values'.</p>
+                    
+                    <p><strong>Instructions:</strong> Read through the list below and rate each value:</p>
+                    <ul style="margin: 15px 0 15px 30px;">
+                        <li><strong>V = Very important</strong></li>
+                        <li><strong>Q = Quite important</strong></li>
+                        <li><strong>N = Not so important</strong></li>
+                    </ul>
+                    <p><strong>Make sure to rate at least ten of them as Very important.</strong></p>
+                </div>
+
+                <div class="progress-indicator">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number" id="veryCount">0</div>
+                        <div class="stat-label">Very Important</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="quiteCount">0</div>
+                        <div class="stat-label">Quite Important</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="notCount">0</div>
+                        <div class="stat-label">Not Important</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="remainingCount">60</div>
+                        <div class="stat-label">Unrated</div>
+                    </div>
+                </div>
+
+                <div class="values-grid" id="valuesGrid">
+                    <!-- Values will be populated by JavaScript -->
+                </div>
+
+                <div class="custom-values">
+                    <h4>Add Your Own Values</h4>
+                    <input type="text" class="custom-input" id="customValue1" placeholder="Insert your own unlisted value here...">
+                    <input type="text" class="custom-input" id="customValue2" placeholder="Insert your own unlisted value here...">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="top-six-selector" id="topSixSection" style="display: none;">
+                    <h3>Select Your Top 6 Most Important Values</h3>
+                    <p>From all your "Very Important" values, select the top 6 that are most important to you. Finally, write those six values out below, to remind yourself this is what you want to stand for as a human being:</p>
+                    <div class="top-six-grid" id="topSixGrid">
+                        <!-- Top 6 selection will be populated by JavaScript -->
+                    </div>
+                    <div id="selectedTopSix" style="margin-top: 20px;">
+                        <h4>Your Top 6 Values:</h4>
+                        <div id="topSixList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Values Worksheet</h2>
+                <div class="instructions">
+                    <p><strong>Deep down inside, what is important to you?</strong> What do you want your life to stand for? What sort of qualities do you want to cultivate as a person? How do you want to be in your relationships with others?</p>
+                    
+                    <p><strong>Values are our heart's deepest desires for the way we want to interact with and relate to the world, other people, and ourselves.</strong> They are leading principles that can guide us and motivate us as we move through life.</p>
+                    
+                    <p><strong>Values are not the same as goals.</strong> Values are directions we keep moving in, whereas goals are what we want to achieve along the way. A value is like heading North; a goal is like the river or mountain or valley we aim to cross whilst traveling in that direction.</p>
+                    
+                    <p>Think about each area in terms of general life directions, rather than in terms of specific goals. Write down what you would value if there were nothing in your way. What's important? What do you care about?</p>
+                </div>
+
+                <div class="values-worksheet-grid">
+                    <div class="worksheet-question">
+                        <h4>1. Family relations</h4>
+                        <p>What sort of brother/sister, son/daughter, uncle/auntie do you want to be? What personal qualities would you like to bring to those relationships? What sort of relationships would you like to build? How would you interact with others if you were the ideal you in these relationships?</p>
+                        <textarea id="familyRelations" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>2. Marriage/couples/intimate relations</h4>
+                        <p>What sort of partner would you like to be in an intimate relationship? What personal qualities would you like to develop? What sort of relationship would you like to build? How would you interact with your partner if you were the 'ideal you' in this relationship?</p>
+                        <textarea id="intimateRelations" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>3. Parenting</h4>
+                        <p>What sort of parent would you like to be? What sort of qualities would you like to have? What sort of relationships would you like to build with your children? How would you behave if you were the 'ideal you'.</p>
+                        <textarea id="parenting" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>4. Friendships/social life</h4>
+                        <p>What sort of qualities would you like to bring to your friendships? If you could be the best friend possible, how would you behave towards your friends? What sort of friendships would you like to build?</p>
+                        <textarea id="friendships" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>5. Career/employment</h4>
+                        <p>What do you value in your work? What would make it more meaningful? What kind of worker would you like to be? If you were living up to your own ideal standards, what personal qualities would you like to bring to your work? What sort of work relations would you like to build?</p>
+                        <textarea id="career" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>6. Education/personal growth and development</h4>
+                        <p>What do you value about learning, education, training, or personal growth? What new skills would you like to learn? What knowledge would you like to gain? What further education appeals to you? What sort of student would you like to be? What personal qualities would you like to apply?</p>
+                        <textarea id="education" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>7. Recreation/fun/leisure</h4>
+                        <p>What sorts of hobbies, sports, or leisure activities do you enjoy? How do you relax and unwind? How do you have fun? What sorts of activities would you like to do?</p>
+                        <textarea id="recreation" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>8. Spirituality</h4>
+                        <p>Whatever spirituality means to you is fine. It may be as simple as communing with nature, or as formal as participation in an organised religious group. What is important to you in this area of life?</p>
+                        <textarea id="spirituality" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>9. Citizenship/environment/community life</h4>
+                        <p>How would you like to contribute to your community or environment, e.g. through volunteering, or recycling, or supporting a group/charity/political party? What sort of environments would you like to create at home, and at work? What environments would you like to spend more time in?</p>
+                        <textarea id="citizenship" placeholder="Your response..."></textarea>
+                    </div>
+
+                    <div class="worksheet-question">
+                        <h4>10. Health/physical well-being</h4>
+                        <p>What are your values related to maintaining your physical well-being? How do you want to look after your health, with regard to sleep, diet, exercise, smoking, alcohol, etc? Why is this important?</p>
+                        <textarea id="physicalHealth" placeholder="Your response..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Values Assessment Rating Form</h2>
+                <div class="instructions">
+                    <p>Read through the values you wrote above. For each of the ten domains, write a few words to summarise your valued direction, e.g. 'To be a loving, supportive, caring, partner.'</p>
+                    <p><strong>Rate how important this value is to you</strong> on a scale of 0 (low importance) to 10 (high importance).</p>
+                    <p><strong>Rate how successfully you have lived this value during the past month</strong> on a scale of 0 (not at all successfully) to 10 (very successfully).</p>
+                    <p><strong>Finally rank these valued directions</strong> in order of the importance you place on working on them right now, with 10 as the highest rank, and 9 the next highest, and so on.</p>
+                </div>
+
+                <div class="rating-table-container">
+                    <table class="rating-table">
+                        <thead>
+                            <tr>
+                                <th>Domain</th>
+                                <th>Valued Direction<br><small>(Write a brief summary, in one or two sentences, or a few key words.)</small></th>
+                                <th>Importance<br><small>(0-10)</small></th>
+                                <th>Success<br><small>(0-10)</small></th>
+                                <th>Rank<br><small>(1-10)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Couples/intimate relationships</strong></td>
+                                <td><input type="text" id="rating_intimate" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_intimate" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_intimate" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_intimate" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Parenting</strong></td>
+                                <td><input type="text" id="rating_parenting" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_parenting" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_parenting" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_parenting" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Family relations</strong></td>
+                                <td><input type="text" id="rating_family" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_family" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_family" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_family" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Social relations</strong></td>
+                                <td><input type="text" id="rating_social" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_social" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_social" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_social" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Employment</strong></td>
+                                <td><input type="text" id="rating_employment" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_employment" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_employment" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_employment" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Education and training</strong></td>
+                                <td><input type="text" id="rating_education_training" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_education_training" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_education_training" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_education_training" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Recreation</strong></td>
+                                <td><input type="text" id="rating_recreation" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_recreation" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_recreation" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_recreation" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spirituality</strong></td>
+                                <td><input type="text" id="rating_spirituality" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_spirituality" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_spirituality" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_spirituality" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Citizenship/community</strong></td>
+                                <td><input type="text" id="rating_citizenship" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_citizenship" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_citizenship" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_citizenship" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Health/Physical wellbeing</strong></td>
+                                <td><input type="text" id="rating_health" placeholder="Brief summary..."></td>
+                                <td><input type="number" id="importance_health" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="success_health" min="0" max="10" placeholder="0-10"></td>
+                                <td><input type="number" id="rank_health" min="1" max="10" placeholder="1-10"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Clarifying Your Values - The Bull's Eye</h2>
+                <div class="instructions">
+                    <p><strong>The Bull's Eye</strong> is a values-clarification exercise designed by Swedish ACT therapist Tobias Lundgren. The dartboard below is divided into four important domains of life: work/education, leisure, relationships and personal growth/health.</p>
+                    
+                    <p><strong>First, write down your values in these 4 areas of life.</strong> Think in terms of general life directions, rather than specific goals. Write down what you would value if there were nothing in your way. What's important? What do you care about?</p>
+                    
+                    <p><strong>Then, make an X in each area of the dart board</strong> to represent where you stand today. An X in the Bull's Eye (centre) means you are living fully by your values. An X far from the Bull's Eye means you are way off the mark.</p>
+                </div>
+
+                <div class="bullseye-container">
+                    <div class="bullseye-values">
+                        <div class="bullseye-value-section">
+                            <h4>1. Work/Education</h4>
+                            <p>Refers to your workplace & career, education and knowledge, skills development. (This may include volunteering and other forms of unpaid work). How do you want to be towards your clients, customers, colleagues, employees, fellow workers? What personal qualities do you want to bring to your work? What skills do you want to develop?</p>
+                            <textarea id="bullseye_work" placeholder="Your values for work/education..."></textarea>
+                        </div>
+
+                        <div class="bullseye-value-section">
+                            <h4>2. Relationships</h4>
+                            <p>Refers to intimacy, closeness, friendship and bonding in your life: it includes relationships with your partner, children, parents, relatives, friends, co-workers, and other social contacts. What sort of relationships do you want to build? How do you want to be in these relationships? What personal qualities do you want to develop?</p>
+                            <textarea id="bullseye_relationships" placeholder="Your values for relationships..."></textarea>
+                        </div>
+
+                        <div class="bullseye-value-section">
+                            <h4>3. Personal Growth/Health</h4>
+                            <p>Refers to your ongoing development as a human being. This may include organized religion, personal expressions of spirituality, creativity, developing life skills, meditation, yoga, getting out into nature; exercise, nutrition, and addressing health risk factors like smoking.</p>
+                            <textarea id="bullseye_growth" placeholder="Your values for personal growth/health..."></textarea>
+                        </div>
+
+                        <div class="bullseye-value-section">
+                            <h4>4. Leisure</h4>
+                            <p>Refers to how you play, relax, stimulate, or enjoy yourself; your hobbies or other activities for rest, recreation, fun and creativity.</p>
+                            <textarea id="bullseye_leisure" placeholder="Your values for leisure..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="dartboard-section">
+                        <h4>The Bull's Eye Dartboard</h4>
+                        <p>Click in each quadrant to mark where you stand today in living by your values:</p>
+                        <div class="dartboard-container">
+                            <svg class="dartboard" width="400" height="400" viewBox="0 0 400 400">
+                                <!-- Dartboard circles -->
+                                <circle cx="200" cy="200" r="190" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="160" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="130" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="100" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="70" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="40" fill="none" stroke="#333" stroke-width="2"/>
+                                <circle cx="200" cy="200" r="15" fill="none" stroke="#333" stroke-width="2"/>
+                                
+                                <!-- Quadrant lines -->
+                                <line x1="200" y1="10" x2="200" y2="390" stroke="#333" stroke-width="2"/>
+                                <line x1="10" y1="200" x2="390" y2="200" stroke="#333" stroke-width="2"/>
+                                
+                                <!-- Labels -->
+                                <text x="200" y="30" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Work/Education</text>
+                                <text x="370" y="205" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Leisure</text>
+                                <text x="200" y="380" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Personal growth/Health</text>
+                                <text x="30" y="205" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Relationships</text>
+                                
+                                <!-- Center and outer labels -->
+                                <text x="200" y="100" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">I am living fully by my values</text>
+                                <text x="200" y="320" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">I am acting very inconsistently with my values</text>
+                                
+                                <!-- Clickable quadrants (invisible) -->
+                                <path d="M 200,200 L 200,10 A 190,190 0 0,1 390,200 Z" fill="transparent" class="quadrant" data-quadrant="work" onclick="markQuadrant('work', event)"/>
+                                <path d="M 200,200 L 390,200 A 190,190 0 0,1 200,390 Z" fill="transparent" class="quadrant" data-quadrant="leisure" onclick="markQuadrant('leisure', event)"/>
+                                <path d="M 200,200 L 200,390 A 190,190 0 0,1 10,200 Z" fill="transparent" class="quadrant" data-quadrant="growth" onclick="markQuadrant('growth', event)"/>
+                                <path d="M 200,200 L 10,200 A 190,190 0 0,1 200,10 Z" fill="transparent" class="quadrant" data-quadrant="relationships" onclick="markQuadrant('relationships', event)"/>
+                                
+                                <!-- Markers will be added dynamically -->
+                                <g id="dartboard-markers"></g>
+                            </svg>
+                        </div>
+                        
+                        <div class="dartboard-status">
+                            <p><strong>Your current positions:</strong></p>
+                            <div id="dartboard-status-list">
+                                <p>Click on each quadrant to mark your position</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section domains-section">
+                <h2>Life Domains - Values and Goals</h2>
+                <p style="margin-bottom: 30px;">Now that you've identified your core values, let's apply them to the four key domains of life and set some goals:</p>
+                
+                <div class="domains-grid">
+                    <div class="domain-card">
+                        <h3>LOVE</h3>
+                        <div class="domain-description">Deepest, most meaningful relationships – including children, partner, parents, close friends and relatives</div>
+                        
+                        <div class="form-group">
+                            <label for="loveValues">My Values:</label>
+                            <textarea id="loveValues" placeholder="Which of your core values apply to this domain?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loveShort">Short Term Goals:</label>
+                            <textarea id="loveShort" placeholder="Goals for the next 1-3 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loveMedium">Medium Term Goals:</label>
+                            <textarea id="loveMedium" placeholder="Goals for the next 6-12 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loveLong">Long Term Goals:</label>
+                            <textarea id="loveLong" placeholder="Goals for 1-5 years"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3>WORK</h3>
+                        <div class="domain-description">Paid work, studying/education/apprenticeships, and unpaid work such as volunteering, or domestic duties</div>
+                        
+                        <div class="form-group">
+                            <label for="workValues">My Values:</label>
+                            <textarea id="workValues" placeholder="Which of your core values apply to this domain?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="workShort">Short Term Goals:</label>
+                            <textarea id="workShort" placeholder="Goals for the next 1-3 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="workMedium">Medium Term Goals:</label>
+                            <textarea id="workMedium" placeholder="Goals for the next 6-12 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="workLong">Long Term Goals:</label>
+                            <textarea id="workLong" placeholder="Goals for 1-5 years"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3>PLAY</h3>
+                        <div class="domain-description">Rest and relaxation, hobbies, creativity, sport, and all forms of leisure, recreation and entertainment</div>
+                        
+                        <div class="form-group">
+                            <label for="playValues">My Values:</label>
+                            <textarea id="playValues" placeholder="Which of your core values apply to this domain?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playShort">Short Term Goals:</label>
+                            <textarea id="playShort" placeholder="Goals for the next 1-3 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playMedium">Medium Term Goals:</label>
+                            <textarea id="playMedium" placeholder="Goals for the next 6-12 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playLong">Long Term Goals:</label>
+                            <textarea id="playLong" placeholder="Goals for 1-5 years"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3>HEALTH</h3>
+                        <div class="domain-description">Physical, psychological, emotional, or spiritual health and wellbeing</div>
+                        
+                        <div class="form-group">
+                            <label for="healthValues">My Values:</label>
+                            <textarea id="healthValues" placeholder="Which of your core values apply to this domain?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="healthShort">Short Term Goals:</label>
+                            <textarea id="healthShort" placeholder="Goals for the next 1-3 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="healthMedium">Medium Term Goals:</label>
+                            <textarea id="healthMedium" placeholder="Goals for the next 6-12 months"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="healthLong">Long Term Goals:</label>
+                            <textarea id="healthLong" placeholder="Goals for 1-5 years"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Goal Setting Worksheet</h2>
+                <div class="instructions">
+                    <p><strong>Step 1:</strong> A key focus in ACT is setting our goals guided by our values. Therefore, Step 1, before any goal setting, is to clarify what value(s) is (are) underlying your goals.</p>
+                    
+                    <div class="form-group">
+                        <label for="underlyingValues"><strong>Step 1: My value(s) underlying these goals are:</strong></label>
+                        <textarea id="underlyingValues" placeholder="What values are driving these goals?"></textarea>
+                    </div>
+                </div>
+
+                <div class="smart-goals-info">
+                    <h3>SMART Goals Framework</h3>
+                    <p>When setting goals, make sure you set a <strong>SMART</strong> goal:</p>
+                    <ul>
+                        <li><strong>Specific:</strong> specify the actions you will take, when and where you will do so, and who or what is involved. Example: "I will ring my wife at lunchtime and tell her I love her."</li>
+                        <li><strong>Meaningful:</strong> The goal should be personally meaningful to you. If it is genuinely guided by your values, then it will be meaningful.</li>
+                        <li><strong>Adaptive:</strong> Does the goal help you to take your life forwards in a direction that is likely to improve the quality of that life?</li>
+                        <li><strong>Realistic:</strong> The goal should be realistically achievable. Take into account your health, competing demands on your time, financial status, and skills.</li>
+                        <li><strong>Time-bound:</strong> Set a day, date and time for it. If not possible, set as accurate a time limit as you can.</li>
+                    </ul>
+                    <p><strong>Also, make sure it's a live person's goal, not a dead person's goal.</strong></p>
+                </div>
+
+                <div class="goals-section">
+                    <h3>Step 2: Write down a graduated series of goals</h3>
+                    <p>Starting from tiny simple goals that can be achieved right away, to long term goals that may not be achieved for months or years:</p>
+                    
+                    <div class="goal-category">
+                        <h4>An Immediate Goal</h4>
+                        <p><em>(something small, simple, easy, I can do in the next 24 hours)</em></p>
+                        <textarea id="immediateGoal" placeholder="What can you do today?"></textarea>
+                    </div>
+
+                    <div class="goal-category">
+                        <h4>Short Term Goals</h4>
+                        <p><em>(things I can do over the next few days and weeks)</em></p>
+                        <textarea id="shortTermGoals" placeholder="What can you accomplish in the coming days and weeks?"></textarea>
+                    </div>
+
+                    <div class="goal-category">
+                        <h4>Medium Term Goal(s)</h4>
+                        <p><em>(things I can do over the next few weeks and months)</em></p>
+                        <textarea id="mediumTermGoals" placeholder="What can you work towards over the next few months?"></textarea>
+                    </div>
+
+                    <div class="goal-category">
+                        <h4>Long Term Goal(s)</h4>
+                        <p><em>(things I can do over the next few months and years)</em></p>
+                        <textarea id="longTermGoals" placeholder="What are your longer-term aspirations?"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="exportToPDF()">Export to PDF</button>
+        </div>
+    </div>
+
+    <script>
+        // Values data from the original worksheet
+        const values = [
+            { id: 1, name: "Acceptance", description: "to be open to and accepting of myself, others, life etc" },
+            { id: 2, name: "Adventure", description: "to be adventurous; to actively seek, create, or explore novel or stimulating experiences" },
+            { id: 3, name: "Assertiveness", description: "to respectfully stand up for my rights and request what I want" },
+            { id: 4, name: "Authenticity", description: "to be authentic, genuine, real; to be true to myself" },
+            { id: 5, name: "Beauty", description: "to appreciate, create, nurture or cultivate beauty in myself, others, the environment etc" },
+            { id: 6, name: "Caring", description: "to be caring towards myself, others, the environment etc" },
+            { id: 7, name: "Challenge", description: "to keep challenging myself to grow, learn, improve" },
+            { id: 8, name: "Compassion", description: "to act with kindness towards those who are suffering" },
+            { id: 9, name: "Connection", description: "to engage fully in whatever I am doing, and be fully present with others" },
+            { id: 10, name: "Contribution", description: "to contribute, help, assist, or make a positive difference to myself or others" },
+            { id: 11, name: "Conformity", description: "to be respectful and obedient of rules and obligations" },
+            { id: 12, name: "Cooperation", description: "to be cooperative and collaborative with others" },
+            { id: 13, name: "Courage", description: "to be courageous or brave; to persist in the face of fear, threat, or difficulty" },
+            { id: 14, name: "Creativity", description: "to be creative or innovative" },
+            { id: 15, name: "Curiosity", description: "to be curious, open-minded and interested; to explore and discover" },
+            { id: 16, name: "Encouragement", description: "to encourage and reward behaviour that I value in myself or others" },
+            { id: 17, name: "Equality", description: "to treat others as equal to myself, and vice-versa" },
+            { id: 18, name: "Excitement", description: "to seek, create and engage in activities that are exciting, stimulating or thrilling" },
+            { id: 19, name: "Fairness", description: "to be fair to myself or others" },
+            { id: 20, name: "Fitness", description: "to maintain or improve my fitness; to look after my physical and mental health and wellbeing" },
+            { id: 21, name: "Flexibility", description: "to adjust and adapt readily to changing circumstances" },
+            { id: 22, name: "Freedom", description: "to live freely; to choose how I live and behave, or help others do likewise" },
+            { id: 23, name: "Friendliness", description: "to be friendly, companionable, or agreeable towards others" },
+            { id: 24, name: "Forgiveness", description: "to be forgiving towards myself or others" },
+            { id: 25, name: "Fun", description: "to be fun-loving; to seek, create, and engage in fun-filled activities" },
+            { id: 26, name: "Generosity", description: "to be generous, sharing and giving, to myself or others" },
+            { id: 27, name: "Gratitude", description: "to be grateful for and appreciative of the positive aspects of myself, others and life" },
+            { id: 28, name: "Honesty", description: "to be honest, truthful, and sincere with myself and others" },
+            { id: 29, name: "Humour", description: "to see and appreciate the humorous side of life" },
+            { id: 30, name: "Humility", description: "to be humble or modest; to let my achievements speak for themselves" },
+            { id: 31, name: "Industry", description: "to be industrious, hard-working, dedicated" },
+            { id: 32, name: "Independence", description: "to be self-supportive, and choose my own way of doing things" },
+            { id: 33, name: "Intimacy", description: "to open up, reveal, and share myself -- emotionally or physically – in my close personal relationships" },
+            { id: 34, name: "Justice", description: "to uphold justice and fairness" },
+            { id: 35, name: "Kindness", description: "to be kind, compassionate, considerate, nurturing or caring towards myself or others" },
+            { id: 36, name: "Love", description: "to act lovingly or affectionately towards myself or others" },
+            { id: 37, name: "Mindfulness", description: "to be conscious of, open to, and curious about my here-and-now experience" },
+            { id: 38, name: "Order", description: "to be orderly and organized" },
+            { id: 39, name: "Open-mindedness", description: "to think things through, see things from other's points of view, and weigh evidence fairly" },
+            { id: 40, name: "Patience", description: "to wait calmly for what I want" },
+            { id: 41, name: "Persistence", description: "to continue resolutely, despite problems or difficulties" },
+            { id: 42, name: "Pleasure", description: "to create and give pleasure to myself or others" },
+            { id: 43, name: "Power", description: "to strongly influence or wield authority over others, e.g. taking charge, leading, organizing" },
+            { id: 44, name: "Reciprocity", description: "to build relationships in which there is a fair balance of giving and taking" },
+            { id: 45, name: "Respect", description: "to be respectful towards myself or others; to be polite, considerate and show positive regard" },
+            { id: 46, name: "Responsibility", description: "to be responsible and accountable for my actions" },
+            { id: 47, name: "Romance", description: "to be romantic; to display and express love or strong affection" },
+            { id: 48, name: "Safety", description: "to secure, protect, or ensure safety of myself or others" },
+            { id: 49, name: "Self-awareness", description: "to be aware of my own thoughts, feelings and actions" },
+            { id: 50, name: "Self-care", description: "to look after my health and wellbeing, and get my needs met" },
+            { id: 51, name: "Self-development", description: "to keep growing, advancing or improving in knowledge, skills, character, or life experience" },
+            { id: 52, name: "Self-control", description: "to act in accordance with my own ideals" },
+            { id: 53, name: "Sensuality", description: "to create, explore and enjoy experiences that stimulate the five senses" },
+            { id: 54, name: "Sexuality", description: "to explore or express my sexuality" },
+            { id: 55, name: "Spirituality", description: "to connect with things bigger than myself" },
+            { id: 56, name: "Skilfulness", description: "to continually practice and improve my skills, and apply myself fully when using them" },
+            { id: 57, name: "Supportiveness", description: "to be supportive, helpful, encouraging, and available to myself or others" },
+            { id: 58, name: "Trust", description: "to be trustworthy; to be loyal, faithful, sincere, and reliable" }
+        ];
+
+        let ratings = {};
+        let topSix = [];
+        let dartboardMarkers = {};
+
+        function initializeValues() {
+            const grid = document.getElementById('valuesGrid');
+            
+            values.forEach(value => {
+                const valueElement = document.createElement('div');
+                valueElement.className = 'value-item';
+                valueElement.innerHTML = `
+                    <div class="value-content">
+                        <div class="value-header">
+                            <span class="value-number">${value.id}.</span>
+                            <span class="value-name">${value.name}:</span>
+                        </div>
+                        <div class="value-description">${value.description}</div>
+                    </div>
+                    <div class="rating-buttons">
+                        <button class="rating-btn very" onclick="rateValue(${value.id}, 'V')" data-value="${value.id}" data-rating="V">V</button>
+                        <button class="rating-btn quite" onclick="rateValue(${value.id}, 'Q')" data-value="${value.id}" data-rating="Q">Q</button>
+                        <button class="rating-btn not" onclick="rateValue(${value.id}, 'N')" data-value="${value.id}" data-rating="N">N</button>
+                    </div>
+                `;
+                grid.appendChild(valueElement);
+            });
+        }
+
+        function rateValue(valueId, rating) {
+            // Remove previous rating for this value
+            const oldRating = ratings[valueId];
+            
+            // Set new rating
+            ratings[valueId] = rating;
+            
+            // Update button states
+            const buttons = document.querySelectorAll(`[data-value="${valueId}"]`);
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.rating === rating) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            updateStats();
+            updateTopSixSection();
+            autoSave();
+        }
+
+        function updateStats() {
+            const counts = { V: 0, Q: 0, N: 0 };
+            Object.values(ratings).forEach(rating => {
+                counts[rating]++;
+            });
+            
+            document.getElementById('veryCount').textContent = counts.V;
+            document.getElementById('quiteCount').textContent = counts.Q;
+            document.getElementById('notCount').textContent = counts.N;
+            document.getElementById('remainingCount').textContent = 60 - Object.keys(ratings).length;
+            
+            // Update progress bar
+            const progress = (Object.keys(ratings).length / 60) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateTopSixSection() {
+            const veryImportantValues = [];
+            Object.entries(ratings).forEach(([valueId, rating]) => {
+                if (rating === 'V') {
+                    const value = values.find(v => v.id === parseInt(valueId));
+                    if (value) veryImportantValues.push(value);
+                }
+            });
+            
+            const topSixSection = document.getElementById('topSixSection');
+            if (veryImportantValues.length >= 6) {
+                topSixSection.style.display = 'block';
+                
+                const grid = document.getElementById('topSixGrid');
+                grid.innerHTML = '';
+                
+                veryImportantValues.forEach(value => {
+                    const item = document.createElement('div');
+                    item.className = 'top-six-item';
+                    item.onclick = () => toggleTopSix(value);
+                    item.innerHTML = `<strong>${value.name}</strong><br><small>${value.description}</small>`;
+                    item.dataset.valueId = value.id;
+                    grid.appendChild(item);
+                });
+                
+                updateTopSixDisplay();
+            } else {
+                topSixSection.style.display = 'none';
+            }
+        }
+
+        function toggleTopSix(value) {
+            const index = topSix.findIndex(v => v.id === value.id);
+            
+            if (index === -1) {
+                if (topSix.length < 6) {
+                    topSix.push(value);
+                } else {
+                    alert('You can only select 6 values. Please deselect one first.');
+                    return;
+                }
+            } else {
+                topSix.splice(index, 1);
+            }
+            
+            updateTopSixDisplay();
+            autoSave();
+        }
+
+        function updateTopSixDisplay() {
+            // Update selection styling
+            const items = document.querySelectorAll('.top-six-item');
+            items.forEach(item => {
+                const valueId = parseInt(item.dataset.valueId);
+                const isSelected = topSix.some(v => v.id === valueId);
+                item.classList.toggle('selected', isSelected);
+            });
+            
+            // Update the list
+            const list = document.getElementById('topSixList');
+            if (topSix.length > 0) {
+                list.innerHTML = topSix.map((value, index) => 
+                    `<p><strong>${index + 1}. ${value.name}</strong> - ${value.description}</p>`
+                ).join('');
+            } else {
+                list.innerHTML = '<p>No values selected yet.</p>';
+            }
+        }
+
+        function markQuadrant(quadrant, event) {
+            const svg = event.target.closest('svg');
+            const rect = svg.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Convert to SVG coordinates
+            const svgX = (x / rect.width) * 400;
+            const svgY = (y / rect.height) * 400;
+            
+            // Store the marker position
+            dartboardMarkers[quadrant] = { x: svgX, y: svgY };
+            
+            // Update the visual markers
+            updateDartboardMarkers();
+            updateDartboardStatus();
+            autoSave();
+        }
+
+        function updateDartboardMarkers() {
+            const markersGroup = document.getElementById('dartboard-markers');
+            markersGroup.innerHTML = '';
+            
+            Object.entries(dartboardMarkers).forEach(([quadrant, pos]) => {
+                const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                marker.setAttribute('cx', pos.x);
+                marker.setAttribute('cy', pos.y);
+                marker.setAttribute('r', '6');
+                marker.setAttribute('class', 'dartboard-marker');
+                markersGroup.appendChild(marker);
+                
+                // Add X text
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', pos.x);
+                text.setAttribute('y', pos.y + 2);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-family', 'Arial');
+                text.setAttribute('font-size', '10');
+                text.setAttribute('font-weight', 'bold');
+                text.setAttribute('fill', 'white');
+                text.textContent = 'X';
+                markersGroup.appendChild(text);
+            });
+        }
+
+        function updateDartboardStatus() {
+            const statusList = document.getElementById('dartboard-status-list');
+            
+            if (Object.keys(dartboardMarkers).length === 0) {
+                statusList.innerHTML = '<p>Click on each quadrant to mark your position</p>';
+                return;
+            }
+            
+            const quadrantNames = {
+                work: 'Work/Education',
+                leisure: 'Leisure', 
+                growth: 'Personal Growth/Health',
+                relationships: 'Relationships'
+            };
+            
+            let statusHTML = '';
+            Object.keys(dartboardMarkers).forEach(quadrant => {
+                const distance = getDistanceFromCenter(dartboardMarkers[quadrant]);
+                const level = getValueLevel(distance);
+                statusHTML += `<div class="status-item">${quadrantNames[quadrant]}: ${level}</div>`;
+            });
+            
+            statusList.innerHTML = statusHTML;
+        }
+
+        function getDistanceFromCenter(pos) {
+            const centerX = 200, centerY = 200;
+            return Math.sqrt(Math.pow(pos.x - centerX, 2) + Math.pow(pos.y - centerY, 2));
+        }
+
+        function getValueLevel(distance) {
+            if (distance <= 15) return 'Living fully by values (Bull\'s Eye!)';
+            if (distance <= 40) return 'Very close to values';
+            if (distance <= 70) return 'Quite close to values';
+            if (distance <= 100) return 'Somewhat close to values';
+            if (distance <= 130) return 'Moderately off values';
+            if (distance <= 160) return 'Quite off values';
+            return 'Very inconsistent with values';
+        }
+
+        function autoSave() {
+            saveResults();
+        }
+
+        function saveResults() {
+            const results = {
+                ratings: ratings,
+                topSix: topSix,
+                customValues: [
+                    document.getElementById('customValue1').value,
+                    document.getElementById('customValue2').value
+                ].filter(v => v.trim()),
+                valuesWorksheet: {
+                    familyRelations: document.getElementById('familyRelations').value,
+                    intimateRelations: document.getElementById('intimateRelations').value,
+                    parenting: document.getElementById('parenting').value,
+                    friendships: document.getElementById('friendships').value,
+                    career: document.getElementById('career').value,
+                    education: document.getElementById('education').value,
+                    recreation: document.getElementById('recreation').value,
+                    spirituality: document.getElementById('spirituality').value,
+                    citizenship: document.getElementById('citizenship').value,
+                    physicalHealth: document.getElementById('physicalHealth').value
+                },
+                ratingsForm: {
+                    intimate: {
+                        direction: document.getElementById('rating_intimate').value,
+                        importance: document.getElementById('importance_intimate').value,
+                        success: document.getElementById('success_intimate').value,
+                        rank: document.getElementById('rank_intimate').value
+                    },
+                    parenting: {
+                        direction: document.getElementById('rating_parenting').value,
+                        importance: document.getElementById('importance_parenting').value,
+                        success: document.getElementById('success_parenting').value,
+                        rank: document.getElementById('rank_parenting').value
+                    },
+                    family: {
+                        direction: document.getElementById('rating_family').value,
+                        importance: document.getElementById('importance_family').value,
+                        success: document.getElementById('success_family').value,
+                        rank: document.getElementById('rank_family').value
+                    },
+                    social: {
+                        direction: document.getElementById('rating_social').value,
+                        importance: document.getElementById('importance_social').value,
+                        success: document.getElementById('success_social').value,
+                        rank: document.getElementById('rank_social').value
+                    },
+                    employment: {
+                        direction: document.getElementById('rating_employment').value,
+                        importance: document.getElementById('importance_employment').value,
+                        success: document.getElementById('success_employment').value,
+                        rank: document.getElementById('rank_employment').value
+                    },
+                    education_training: {
+                        direction: document.getElementById('rating_education_training').value,
+                        importance: document.getElementById('importance_education_training').value,
+                        success: document.getElementById('success_education_training').value,
+                        rank: document.getElementById('rank_education_training').value
+                    },
+                    recreation: {
+                        direction: document.getElementById('rating_recreation').value,
+                        importance: document.getElementById('importance_recreation').value,
+                        success: document.getElementById('success_recreation').value,
+                        rank: document.getElementById('rank_recreation').value
+                    },
+                    spirituality: {
+                        direction: document.getElementById('rating_spirituality').value,
+                        importance: document.getElementById('importance_spirituality').value,
+                        success: document.getElementById('success_spirituality').value,
+                        rank: document.getElementById('rank_spirituality').value
+                    },
+                    citizenship: {
+                        direction: document.getElementById('rating_citizenship').value,
+                        importance: document.getElementById('importance_citizenship').value,
+                        success: document.getElementById('success_citizenship').value,
+                        rank: document.getElementById('rank_citizenship').value
+                    },
+                    health: {
+                        direction: document.getElementById('rating_health').value,
+                        importance: document.getElementById('importance_health').value,
+                        success: document.getElementById('success_health').value,
+                        rank: document.getElementById('rank_health').value
+                    }
+                },
+                bullsEye: {
+                    work: document.getElementById('bullseye_work').value,
+                    relationships: document.getElementById('bullseye_relationships').value,
+                    growth: document.getElementById('bullseye_growth').value,
+                    leisure: document.getElementById('bullseye_leisure').value,
+                    markers: dartboardMarkers
+                },
+                smartGoals: {
+                    underlyingValues: document.getElementById('underlyingValues').value,
+                    immediateGoal: document.getElementById('immediateGoal').value,
+                    shortTermGoals: document.getElementById('shortTermGoals').value,
+                    mediumTermGoals: document.getElementById('mediumTermGoals').value,
+                    longTermGoals: document.getElementById('longTermGoals').value
+                },
+                domains: {
+                    love: {
+                        values: document.getElementById('loveValues').value,
+                        shortTerm: document.getElementById('loveShort').value,
+                        mediumTerm: document.getElementById('loveMedium').value,
+                        longTerm: document.getElementById('loveLong').value
+                    },
+                    work: {
+                        values: document.getElementById('workValues').value,
+                        shortTerm: document.getElementById('workShort').value,
+                        mediumTerm: document.getElementById('workMedium').value,
+                        longTerm: document.getElementById('workLong').value
+                    },
+                    play: {
+                        values: document.getElementById('playValues').value,
+                        shortTerm: document.getElementById('playShort').value,
+                        mediumTerm: document.getElementById('playMedium').value,
+                        longTerm: document.getElementById('playLong').value
+                    },
+                    health: {
+                        values: document.getElementById('healthValues').value,
+                        shortTerm: document.getElementById('healthShort').value,
+                        mediumTerm: document.getElementById('healthMedium').value,
+                        longTerm: document.getElementById('healthLong').value
+                    }
+                }
+            };
+            
+            localStorage.setItem('valuesAssessment', JSON.stringify(results));
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set up document properties
+            doc.setProperties({
+                title: 'My Values Assessment Results',
+                subject: 'Personal Values and Life Goals',
+                author: 'Values Assessment Tool',
+                creator: 'Claude Code'
+            });
+            
+            let yPos = 20;
+            const pageHeight = doc.internal.pageSize.height;
+            const margin = 20;
+            const lineHeight = 8;
+            
+            // Helper function to check if we need a new page
+            function checkPageBreak(nextHeight = lineHeight) {
+                if (yPos + nextHeight > pageHeight - margin) {
+                    doc.addPage();
+                    yPos = margin;
+                    return true;
+                }
+                return false;
+            }
+            
+            // Helper function to add wrapped text
+            function addWrappedText(text, x, y, maxWidth, fontSize = 12) {
+                doc.setFontSize(fontSize);
+                const lines = doc.splitTextToSize(text, maxWidth);
+                lines.forEach((line, index) => {
+                    if (index > 0) checkPageBreak();
+                    doc.text(line, x, y + (index * lineHeight));
+                });
+                return lines.length * lineHeight;
+            }
+            
+            // Title
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(20);
+            doc.text('A Quick Look at Your Values', margin, yPos);
+            yPos += 15;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.text(`Assessment completed on: ${new Date().toLocaleDateString()}`, margin, yPos);
+            yPos += 20;
+            
+            // Values ratings summary
+            checkPageBreak(30);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(16);
+            doc.text('Values Assessment Summary', margin, yPos);
+            yPos += 15;
+            
+            const counts = { V: 0, Q: 0, N: 0 };
+            Object.values(ratings).forEach(rating => {
+                counts[rating]++;
+            });
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.text(`Very Important: ${counts.V} values`, margin, yPos);
+            yPos += lineHeight;
+            doc.text(`Quite Important: ${counts.Q} values`, margin, yPos);
+            yPos += lineHeight;
+            doc.text(`Not Important: ${counts.N} values`, margin, yPos);
+            yPos += 15;
+            
+            // Top 6 Values section
+            if (topSix.length > 0) {
+                checkPageBreak(30);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(16);
+                doc.text('My Top 6 Most Important Values', margin, yPos);
+                yPos += 15;
+                
+                topSix.forEach((value, index) => {
+                    checkPageBreak(20);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(`${index + 1}. ${value.name}`, margin, yPos);
+                    yPos += lineHeight;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const descHeight = addWrappedText(value.description, margin + 10, yPos, 170);
+                    yPos += descHeight + 5;
+                });
+                yPos += 10;
+            }
+            
+            // All values ratings
+            checkPageBreak(30);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(16);
+            doc.text('Complete Values Ratings', margin, yPos);
+            yPos += 15;
+            
+            // Group values by rating
+            const groupedValues = { V: [], Q: [], N: [] };
+            Object.entries(ratings).forEach(([valueId, rating]) => {
+                const value = values.find(v => v.id === parseInt(valueId));
+                if (value) {
+                    groupedValues[rating].push(value);
+                }
+            });
+            
+            // Very Important values
+            if (groupedValues.V.length > 0) {
+                checkPageBreak(20);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.text('Very Important Values:', margin, yPos);
+                yPos += 10;
+                
+                groupedValues.V.forEach(value => {
+                    checkPageBreak(15);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const text = `${value.id}. ${value.name} - ${value.description}`;
+                    const textHeight = addWrappedText(text, margin + 5, yPos, 165);
+                    yPos += textHeight + 2;
+                });
+                yPos += 5;
+            }
+            
+            // Quite Important values
+            if (groupedValues.Q.length > 0) {
+                checkPageBreak(20);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.text('Quite Important Values:', margin, yPos);
+                yPos += 10;
+                
+                groupedValues.Q.forEach(value => {
+                    checkPageBreak(15);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const text = `${value.id}. ${value.name} - ${value.description}`;
+                    const textHeight = addWrappedText(text, margin + 5, yPos, 165);
+                    yPos += textHeight + 2;
+                });
+                yPos += 5;
+            }
+            
+            // Custom values
+            const customValues = [
+                document.getElementById('customValue1').value,
+                document.getElementById('customValue2').value
+            ].filter(v => v.trim());
+            
+            if (customValues.length > 0) {
+                checkPageBreak(20);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.text('My Custom Values:', margin, yPos);
+                yPos += 10;
+                
+                customValues.forEach((value, index) => {
+                    checkPageBreak(10);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.text(`${index + 1}. ${value}`, margin + 5, yPos);
+                    yPos += lineHeight + 2;
+                });
+                yPos += 5;
+            }
+            
+            // Values Worksheet section
+            doc.addPage();
+            yPos = margin;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('Values Worksheet', margin, yPos);
+            yPos += 15;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.text('Deep down inside, what is important to you? What do you want your life to stand for?', margin, yPos);
+            yPos += 20;
+            
+            const worksheetQuestions = [
+                { id: 'familyRelations', title: '1. Family relations', question: 'What sort of brother/sister, son/daughter, uncle/auntie do you want to be?' },
+                { id: 'intimateRelations', title: '2. Marriage/couples/intimate relations', question: 'What sort of partner would you like to be in an intimate relationship?' },
+                { id: 'parenting', title: '3. Parenting', question: 'What sort of parent would you like to be? What sort of qualities would you like to have?' },
+                { id: 'friendships', title: '4. Friendships/social life', question: 'What sort of qualities would you like to bring to your friendships?' },
+                { id: 'career', title: '5. Career/employment', question: 'What do you value in your work? What would make it more meaningful?' },
+                { id: 'education', title: '6. Education/personal growth and development', question: 'What do you value about learning, education, training, or personal growth?' },
+                { id: 'recreation', title: '7. Recreation/fun/leisure', question: 'What sorts of hobbies, sports, or leisure activities do you enjoy?' },
+                { id: 'spirituality', title: '8. Spirituality', question: 'Whatever spirituality means to you is fine. What is important to you in this area?' },
+                { id: 'citizenship', title: '9. Citizenship/environment/community life', question: 'How would you like to contribute to your community or environment?' },
+                { id: 'physicalHealth', title: '10. Health/physical well-being', question: 'What are your values related to maintaining your physical well-being?' }
+            ];
+            
+            worksheetQuestions.forEach(item => {
+                const response = document.getElementById(item.id).value;
+                if (response.trim()) {
+                    checkPageBreak(30);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(item.title, margin, yPos);
+                    yPos += 8;
+                    
+                    doc.setFont('helvetica', 'italic');
+                    doc.setFontSize(10);
+                    const questionHeight = addWrappedText(item.question, margin, yPos, 170);
+                    yPos += questionHeight + 5;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const responseHeight = addWrappedText(response, margin + 5, yPos, 165);
+                    yPos += responseHeight + 15;
+                }
+            });
+
+            // Rating Form section
+            doc.addPage();
+            yPos = margin;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('Values Assessment Rating Form', margin, yPos);
+            yPos += 20;
+            
+            const ratingDomains = [
+                { id: 'intimate', name: 'Couples/intimate relationships' },
+                { id: 'parenting', name: 'Parenting' },
+                { id: 'family', name: 'Family relations' },
+                { id: 'social', name: 'Social relations' },
+                { id: 'employment', name: 'Employment' },
+                { id: 'education_training', name: 'Education and training' },
+                { id: 'recreation', name: 'Recreation' },
+                { id: 'spirituality', name: 'Spirituality' },
+                { id: 'citizenship', name: 'Citizenship/community' },
+                { id: 'health', name: 'Health/Physical wellbeing' }
+            ];
+            
+            ratingDomains.forEach(domain => {
+                const direction = document.getElementById(`rating_${domain.id}`).value;
+                const importance = document.getElementById(`importance_${domain.id}`).value;
+                const success = document.getElementById(`success_${domain.id}`).value;
+                const rank = document.getElementById(`rank_${domain.id}`).value;
+                
+                if (direction.trim() || importance || success || rank) {
+                    checkPageBreak(25);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(domain.name, margin, yPos);
+                    yPos += 10;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    if (direction.trim()) doc.text(`Direction: ${direction}`, margin + 10, yPos), yPos += 8;
+                    if (importance) doc.text(`Importance: ${importance}/10`, margin + 10, yPos), yPos += 8;
+                    if (success) doc.text(`Success: ${success}/10`, margin + 10, yPos), yPos += 8;
+                    if (rank) doc.text(`Rank: ${rank}`, margin + 10, yPos), yPos += 8;
+                    yPos += 5;
+                }
+            });
+
+            // Bull's Eye section
+            doc.addPage();
+            yPos = margin;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('Bull\'s Eye - Values Clarification', margin, yPos);
+            yPos += 20;
+            
+            const bullsEyeDomains = [
+                { id: 'work', name: 'Work/Education' },
+                { id: 'relationships', name: 'Relationships' },
+                { id: 'growth', name: 'Personal Growth/Health' },
+                { id: 'leisure', name: 'Leisure' }
+            ];
+            
+            bullsEyeDomains.forEach(domain => {
+                const values = document.getElementById(`bullseye_${domain.id}`).value;
+                if (values.trim()) {
+                    checkPageBreak(25);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(`${domain.name}:`, margin, yPos);
+                    yPos += 10;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const valuesHeight = addWrappedText(values, margin + 10, yPos, 165);
+                    yPos += valuesHeight + 10;
+                }
+            });
+            
+            // Bull's Eye positions
+            if (Object.keys(dartboardMarkers).length > 0) {
+                checkPageBreak(30);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.text('Bull\'s Eye Current Positions:', margin, yPos);
+                yPos += 15;
+                
+                const quadrantNames = {
+                    work: 'Work/Education',
+                    leisure: 'Leisure', 
+                    growth: 'Personal Growth/Health',
+                    relationships: 'Relationships'
+                };
+                
+                Object.entries(dartboardMarkers).forEach(([quadrant, pos]) => {
+                    const distance = getDistanceFromCenter(pos);
+                    const level = getValueLevel(distance);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.text(`${quadrantNames[quadrant]}: ${level}`, margin + 5, yPos);
+                    yPos += 8;
+                });
+                yPos += 10;
+            }
+
+            // SMART Goals section
+            doc.addPage();
+            yPos = margin;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('SMART Goal Setting Worksheet', margin, yPos);
+            yPos += 20;
+            
+            const underlyingValuesContent = document.getElementById('underlyingValues').value;
+            if (underlyingValuesContent.trim()) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                doc.text('My values underlying these goals:', margin, yPos);
+                yPos += 10;
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                const valuesHeight = addWrappedText(underlyingValuesContent, margin + 5, yPos, 165);
+                yPos += valuesHeight + 15;
+            }
+            
+            const smartGoals = [
+                { id: 'immediateGoal', title: 'Immediate Goal (next 24 hours)' },
+                { id: 'shortTermGoals', title: 'Short Term Goals (days and weeks)' },
+                { id: 'mediumTermGoals', title: 'Medium Term Goals (weeks and months)' },
+                { id: 'longTermGoals', title: 'Long Term Goals (months and years)' }
+            ];
+            
+            smartGoals.forEach(goal => {
+                const content = document.getElementById(goal.id).value;
+                if (content.trim()) {
+                    checkPageBreak(25);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.text(goal.title, margin, yPos);
+                    yPos += 10;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    const contentHeight = addWrappedText(content, margin + 5, yPos, 165);
+                    yPos += contentHeight + 15;
+                }
+            });
+
+            // Life domains section
+            doc.addPage();
+            yPos = margin;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('Life Domains - Values and Goals', margin, yPos);
+            yPos += 20;
+            
+            const domains = [
+                {
+                    name: 'LOVE',
+                    description: 'Deepest, most meaningful relationships – including children, partner, parents, close friends and relatives',
+                    prefix: 'love'
+                },
+                {
+                    name: 'WORK',
+                    description: 'Paid work, studying/education/apprenticeships, and unpaid work such as volunteering, or domestic duties',
+                    prefix: 'work'
+                },
+                {
+                    name: 'PLAY',
+                    description: 'Rest and relaxation, hobbies, creativity, sport, and all forms of leisure, recreation and entertainment',
+                    prefix: 'play'
+                },
+                {
+                    name: 'HEALTH',
+                    description: 'Physical, psychological, emotional, or spiritual health and wellbeing',
+                    prefix: 'health'
+                }
+            ];
+            
+            domains.forEach(domain => {
+                const values = document.getElementById(`${domain.prefix}Values`).value;
+                const shortTerm = document.getElementById(`${domain.prefix}Short`).value;
+                const mediumTerm = document.getElementById(`${domain.prefix}Medium`).value;
+                const longTerm = document.getElementById(`${domain.prefix}Long`).value;
+                
+                // Check if domain has any content
+                if (values || shortTerm || mediumTerm || longTerm) {
+                    checkPageBreak(50);
+                    
+                    // Domain title
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(16);
+                    doc.text(domain.name, margin, yPos);
+                    yPos += 8;
+                    
+                    // Domain description
+                    doc.setFont('helvetica', 'italic');
+                    doc.setFontSize(10);
+                    const descHeight = addWrappedText(domain.description, margin, yPos, 170);
+                    yPos += descHeight + 10;
+                    
+                    // Values
+                    if (values.trim()) {
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.text('My Values:', margin, yPos);
+                        yPos += 8;
+                        
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        const valuesHeight = addWrappedText(values, margin + 10, yPos, 160);
+                        yPos += valuesHeight + 8;
+                    }
+                    
+                    // Short term goals
+                    if (shortTerm.trim()) {
+                        checkPageBreak(20);
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.text('Short Term Goals:', margin, yPos);
+                        yPos += 8;
+                        
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        const shortHeight = addWrappedText(shortTerm, margin + 10, yPos, 160);
+                        yPos += shortHeight + 8;
+                    }
+                    
+                    // Medium term goals
+                    if (mediumTerm.trim()) {
+                        checkPageBreak(20);
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.text('Medium Term Goals:', margin, yPos);
+                        yPos += 8;
+                        
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        const mediumHeight = addWrappedText(mediumTerm, margin + 10, yPos, 160);
+                        yPos += mediumHeight + 8;
+                    }
+                    
+                    // Long term goals
+                    if (longTerm.trim()) {
+                        checkPageBreak(20);
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.text('Long Term Goals:', margin, yPos);
+                        yPos += 8;
+                        
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        const longHeight = addWrappedText(longTerm, margin + 10, yPos, 160);
+                        yPos += longHeight + 15;
+                    }
+                }
+            });
+            
+            // Add footer to all pages
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.text(`Generated with Claude Code - Page ${i} of ${pageCount}`, margin, pageHeight - 10);
+                doc.text(`© Russ Harris 2010 - www.thehappinesstrap.com`, pageHeight / 2, pageHeight - 10, { align: 'center' });
+            }
+            
+            // Generate filename with timestamp
+            const timestamp = new Date().toISOString().slice(0, 10);
+            const filename = `My_Values_Assessment_${timestamp}.pdf`;
+            
+            // Save the PDF
+            doc.save(filename);
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all your responses? This cannot be undone.')) {
+                ratings = {};
+                topSix = [];
+                
+                // Reset all buttons
+                document.querySelectorAll('.rating-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Reset all text areas
+                document.querySelectorAll('textarea').forEach(textarea => {
+                    textarea.value = '';
+                });
+                
+                // Reset custom values
+                document.getElementById('customValue1').value = '';
+                document.getElementById('customValue2').value = '';
+                
+                updateStats();
+                updateTopSixSection();
+            }
+        }
+
+        function loadSavedResults() {
+            const saved = localStorage.getItem('valuesAssessment');
+            if (saved) {
+                const results = JSON.parse(saved);
+                
+                // Load ratings
+                ratings = results.ratings || {};
+                topSix = results.topSix || [];
+                
+                // Restore button states
+                Object.entries(ratings).forEach(([valueId, rating]) => {
+                    const button = document.querySelector(`[data-value="${valueId}"][data-rating="${rating}"]`);
+                    if (button) button.classList.add('active');
+                });
+                
+                // Load custom values
+                if (results.customValues) {
+                    document.getElementById('customValue1').value = results.customValues[0] || '';
+                    document.getElementById('customValue2').value = results.customValues[1] || '';
+                }
+                
+                // Load values worksheet responses
+                if (results.valuesWorksheet) {
+                    Object.entries(results.valuesWorksheet).forEach(([field, value]) => {
+                        const element = document.getElementById(field);
+                        if (element) element.value = value;
+                    });
+                }
+
+                // Load ratings form responses
+                if (results.ratingsForm) {
+                    Object.entries(results.ratingsForm).forEach(([domain, data]) => {
+                        if (data.direction) document.getElementById(`rating_${domain}`).value = data.direction;
+                        if (data.importance) document.getElementById(`importance_${domain}`).value = data.importance;
+                        if (data.success) document.getElementById(`success_${domain}`).value = data.success;
+                        if (data.rank) document.getElementById(`rank_${domain}`).value = data.rank;
+                    });
+                }
+
+                // Load Bull's Eye responses
+                if (results.bullsEye) {
+                    ['work', 'relationships', 'growth', 'leisure'].forEach(domain => {
+                        const element = document.getElementById(`bullseye_${domain}`);
+                        if (element && results.bullsEye[domain]) {
+                            element.value = results.bullsEye[domain];
+                        }
+                    });
+                    
+                    if (results.bullsEye.markers) {
+                        dartboardMarkers = results.bullsEye.markers;
+                        updateDartboardMarkers();
+                        updateDartboardStatus();
+                    }
+                }
+
+                // Load SMART goals responses
+                if (results.smartGoals) {
+                    Object.entries(results.smartGoals).forEach(([field, value]) => {
+                        const element = document.getElementById(field);
+                        if (element) element.value = value;
+                    });
+                }
+
+                // Load domain responses
+                if (results.domains) {
+                    Object.entries(results.domains).forEach(([domain, data]) => {
+                        Object.entries(data).forEach(([field, value]) => {
+                            const element = document.getElementById(`${domain}${field.charAt(0).toUpperCase() + field.slice(1)}`);
+                            if (element) element.value = value;
+                        });
+                    });
+                }
+                
+                updateStats();
+                updateTopSixSection();
+            }
+        }
+
+        function setupAutoSave() {
+            // Add event listeners for all inputs to trigger auto-save
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', autoSave);
+                input.addEventListener('change', autoSave);
+            });
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeValues();
+            loadSavedResults();
+            setupAutoSave();
+        });
+    </script>
+</body>
+</html>
