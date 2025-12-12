@@ -1,0 +1,26 @@
+{
+  "pairings": {
+    "Audrey Swannack": "Harriet Stockman",
+    "Harriet Stockman": "Kayla Swannack",
+    "Kayla Swannack": "Cole Swannack",
+    "Cole Swannack": "Rowan Swannack",
+    "Rowan Swannack": "Jane Rayswan",
+    "Jane Rayswan": "Lindsay Swannack",
+    "Lindsay Swannack": "Jerome Swannack",
+    "Jerome Swannack": "Shane Swannack",
+    "Shane Swannack": "Jessica",
+    "Jessica": "Audrey Swannack"
+  },
+  "links": {
+    "Audrey Swannack": "c78cc8cf-b6e2-4a86-8e13-4bf1bed3ffe4",
+    "Cole Swannack": "4dad6545-717f-4f72-94dc-04ceff67849a",
+    "Harriet Stockman": "5c79e6c3-3a92-43f5-a874-192d7315b281",
+    "Jane Rayswan": "62de0fa6-e1ad-4824-9285-e0fa8cb6fde1",
+    "Jerome Swannack": "065453d8-8704-44ac-9350-a56e52ae34b6",
+    "Jessica": "411652dd-fe62-4e1c-ad70-65ec272590dc",
+    "Kayla Swannack": "202957a9-2cbd-4d1e-9c87-91802e602855",
+    "Lindsay Swannack": "a4e92164-6f7e-4f72-8b12-686bda499a8f",
+    "Rowan Swannack": "3416be4f-6ee3-47c6-9e2a-8b31040597af",
+    "Shane Swannack": "383dc9f7-cd3e-4ab4-b3ee-76c6f1c0f93b"
+  }
+}
