@@ -73,12 +73,15 @@ def verify_single_cycle(mapping):
 
 def generate_html_page(giver, receiver, year=2025):
     """Generate HTML page for a participant."""
-    return f"""<!DOCTYPE html>
+    return f"""---
+layout: none
+---
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Santa {year}</title>
+    <title>Secret Santa {year} 🎄</title>
     <style>
         * {{
             margin: 0;
@@ -87,111 +90,259 @@ def generate_html_page(giver, receiver, year=2025):
         }}
 
         body {{
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }}
+
+        /* Floating 57s in background */
+        .lucky-number {{
+            position: absolute;
+            font-size: 3em;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.15);
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+            font-family: 'Georgia', serif;
+        }}
+
+        .lucky-number:nth-child(1) {{ top: 10%; left: 10%; animation-delay: 0s; }}
+        .lucky-number:nth-child(2) {{ top: 20%; right: 15%; animation-delay: 2s; }}
+        .lucky-number:nth-child(3) {{ bottom: 15%; left: 20%; animation-delay: 4s; }}
+        .lucky-number:nth-child(4) {{ bottom: 25%; right: 10%; animation-delay: 6s; }}
+        .lucky-number:nth-child(5) {{ top: 50%; left: 5%; animation-delay: 8s; }}
+        .lucky-number:nth-child(6) {{ top: 60%; right: 8%; animation-delay: 10s; }}
+
+        @keyframes float {{
+            0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
+            50% {{ transform: translateY(-20px) rotate(5deg); }}
         }}
 
         .container {{
             background: white;
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 600px;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 650px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
             text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 3px solid #ffd700;
         }}
 
-        .snowflake {{
-            font-size: 60px;
-            margin-bottom: 20px;
+        .lucky-badge {{
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #8b0000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #ff6b6b;
+            animation: pulse 2s infinite;
+        }}
+
+        @keyframes pulse {{
+            0%, 100% {{ transform: scale(1); }}
+            50% {{ transform: scale(1.05); }}
+        }}
+
+        .decorative-stars {{
+            font-size: 2em;
+            margin-bottom: 15px;
+            animation: twinkle 3s infinite;
+        }}
+
+        @keyframes twinkle {{
+            0%, 100% {{ opacity: 1; }}
+            50% {{ opacity: 0.5; }}
         }}
 
         h1 {{
-            color: #2d3748;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: normal;
+            color: #8b0000;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }}
 
         .greeting {{
-            color: #4a5568;
-            font-size: 1.3em;
-            margin-bottom: 40px;
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 600;
         }}
 
         .reveal-box {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 30px 0;
+            background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 25px 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid #ffd700;
+        }}
+
+        .reveal-box::before {{
+            content: '57';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.4);
+            font-family: 'Georgia', serif;
+        }}
+
+        .reveal-box::after {{
+            content: '57';
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.4);
+            font-family: 'Georgia', serif;
         }}
 
         .label {{
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1em;
-            margin-bottom: 15px;
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 18px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-weight: bold;
         }}
 
         .receiver-name {{
             color: white;
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border: 2px dashed #ffd700;
         }}
 
         .message {{
-            color: #4a5568;
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-top: 30px;
+            color: #2d3748;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6f0 100%);
+            border-radius: 15px;
+            border-left: 5px solid #ff6b6b;
         }}
 
         .footer {{
-            margin-top: 40px;
-            color: #718096;
-            font-size: 0.9em;
+            margin-top: 35px;
+            color: #8b0000;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }}
+
+        .gift-limit {{
+            margin-top: 20px;
+            padding: 15px;
+            background: #e6f7ff;
+            border-radius: 12px;
+            border: 2px solid #1890ff;
+            color: #0050b3;
+            font-size: 1.1em;
+            font-weight: 600;
+        }}
+
+        .gift-limit .amount {{
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8b0000;
         }}
 
         @media (max-width: 600px) {{
             .container {{
                 padding: 30px 20px;
+                border-radius: 20px;
+            }}
+
+            .lucky-badge {{
+                top: -12px;
+                right: 15px;
+                font-size: 0.75em;
+                padding: 6px 15px;
             }}
 
             h1 {{
                 font-size: 2em;
             }}
 
+            .greeting {{
+                font-size: 1.2em;
+            }}
+
             .receiver-name {{
                 font-size: 2em;
+            }}
+
+            .lucky-number {{
+                font-size: 2em;
+            }}
+
+            .message {{
+                font-size: 1em;
             }}
         }}
     </style>
 </head>
 <body>
+    <!-- Floating 57s in background -->
+    <div class="lucky-number">57</div>
+    <div class="lucky-number">57</div>
+    <div class="lucky-number">57</div>
+    <div class="lucky-number">57</div>
+    <div class="lucky-number">57</div>
+    <div class="lucky-number">57</div>
+
     <div class="container">
-        <div class="snowflake">🎄</div>
+        <div class="lucky-badge">Lucky #57 ✨</div>
+
+        <div class="decorative-stars">🎄 ⭐ 🎅 ⭐ 🎄</div>
         <h1>Secret Santa {year}</h1>
-        <p class="greeting">Hello, {giver}!</p>
+        <p class="greeting">Hello, {giver}! 🎁</p>
 
         <div class="reveal-box">
-            <div class="label">You are Secret Santa for:</div>
+            <div class="label">🎯 You are Secret Santa for:</div>
             <div class="receiver-name">{receiver}</div>
         </div>
 
+        <div class="gift-limit">
+            💰 Gift Budget: <span class="amount">$57</span> 💰
+        </div>
+
         <p class="message">
-            Remember to keep it secret! 🤫<br>
-            Have fun finding the perfect gift! 🎁
+            🤫 <strong>Remember:</strong> Keep it secret!<br>
+            🎁 Have fun finding the perfect gift!<br>
+            ✨ Budget is $57 (our lucky number!)
         </p>
 
         <div class="footer">
-            Happy Holidays! ❤️
+            🎄 Happy Holidays! ❤️ Family Lucky Number: 57 🎄
         </div>
     </div>
 </body>
