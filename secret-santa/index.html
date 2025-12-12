@@ -230,9 +230,8 @@ layout: none
             <div class="instructions-text">
                 1. Click "Copy Link" for each person<br>
                 2. Send each person ONLY their own link (via text, email, etc.)<br>
-                3. The links are random and non-guessable for privacy<br>
-                4. Each person will see who they need to buy a gift for<br>
-                5. <strong>Gift budget is $57 (family lucky number!)</strong>
+                3. Each person will tap the 3D gift box to reveal who they got!<br>
+                4. <strong>Gift budget is $57 (family lucky number!)</strong>
             </div>
         </div>
 
@@ -359,13 +358,6 @@ layout: none
                 toast.classList.remove('show');
             }, 3000);
         }
-
-        // Prevent accidental navigation
-        window.addEventListener('beforeunload', (e) => {
-            // Don't show warning for now, but you can uncomment this if needed
-            // e.preventDefault();
-            // e.returnValue = '';
-        });
     </script>
 </body>
 </html>
