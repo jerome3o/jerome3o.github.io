@@ -1,3 +1,6 @@
+---
+layout: none
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,24 +15,25 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .container {
             background: white;
             border-radius: 20px;
-            padding: 50px;
-            max-width: 1000px;
+            padding: 30px;
+            max-width: 800px;
             margin: 0 auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             color: #2d3748;
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -37,93 +41,174 @@
         .warning {
             background: #fed7d7;
             border-left: 4px solid #f56565;
-            padding: 20px;
-            margin: 30px 0;
+            padding: 15px;
+            margin: 20px 0;
             border-radius: 5px;
         }
 
         .warning-title {
             color: #c53030;
             font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+            margin-bottom: 8px;
         }
 
         .warning-text {
             color: #742a2a;
-        }
-
-        .links-section {
-            margin-top: 40px;
-        }
-
-        h2 {
-            color: #2d3748;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li {
-            background: #f7fafc;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        li strong {
-            color: #2d3748;
-            display: inline-block;
-            min-width: 180px;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-            word-break: break-all;
-        }
-
-        a:hover {
-            color: #764ba2;
-            text-decoration: underline;
+            font-size: 0.95em;
         }
 
         .instructions {
             background: #e6fffa;
             border-left: 4px solid #38b2ac;
-            padding: 20px;
-            margin: 30px 0;
+            padding: 15px;
+            margin: 20px 0;
             border-radius: 5px;
         }
 
         .instructions-title {
             color: #234e52;
             font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+            margin-bottom: 8px;
         }
 
         .instructions-text {
             color: #234e52;
             line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .links-section {
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .person-item {
+            background: #f7fafc;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .person-name {
+            color: #2d3748;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .link-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .link-display {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75em;
+            color: #718096;
+            background: #edf2f7;
+            padding: 8px 12px;
+            border-radius: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: #38b2ac;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            z-index: 1000;
+            font-size: 0.95em;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
 
         @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                padding: 30px 20px;
+                padding: 20px;
+                border-radius: 15px;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 1.5em;
             }
 
-            li strong {
-                display: block;
-                margin-bottom: 5px;
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .person-item {
+                padding: 12px;
+            }
+
+            .link-display {
+                font-size: 0.65em;
+                padding: 6px 10px;
+            }
+
+            .copy-btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .link-container {
+                flex-direction: column;
             }
         }
     </style>
@@ -143,7 +228,7 @@
         <div class="instructions">
             <div class="instructions-title">📝 Instructions</div>
             <div class="instructions-text">
-                1. Click on each person's link below to copy their unique URL<br>
+                1. Click "Copy Link" for each person<br>
                 2. Send each person ONLY their own link (via text, email, etc.)<br>
                 3. The links are random and non-guessable for privacy<br>
                 4. Each person will see who they need to buy a gift for
@@ -152,19 +237,134 @@
 
         <div class="links-section">
             <h2>Individual Links</h2>
-            <ul>
-            <li><strong>Audrey Swannack</strong>: <a href="c78cc8cf-b6e2-4a86-8e13-4bf1bed3ffe4.html" target="_blank">c78cc8cf-b6e2-4a86-8e13-4bf1bed3ffe4.html</a></li>
-            <li><strong>Cole Swannack</strong>: <a href="4dad6545-717f-4f72-94dc-04ceff67849a.html" target="_blank">4dad6545-717f-4f72-94dc-04ceff67849a.html</a></li>
-            <li><strong>Harriet Stockman</strong>: <a href="5c79e6c3-3a92-43f5-a874-192d7315b281.html" target="_blank">5c79e6c3-3a92-43f5-a874-192d7315b281.html</a></li>
-            <li><strong>Jane Rayswan</strong>: <a href="62de0fa6-e1ad-4824-9285-e0fa8cb6fde1.html" target="_blank">62de0fa6-e1ad-4824-9285-e0fa8cb6fde1.html</a></li>
-            <li><strong>Jerome Swannack</strong>: <a href="065453d8-8704-44ac-9350-a56e52ae34b6.html" target="_blank">065453d8-8704-44ac-9350-a56e52ae34b6.html</a></li>
-            <li><strong>Jessica</strong>: <a href="411652dd-fe62-4e1c-ad70-65ec272590dc.html" target="_blank">411652dd-fe62-4e1c-ad70-65ec272590dc.html</a></li>
-            <li><strong>Kayla Swannack</strong>: <a href="202957a9-2cbd-4d1e-9c87-91802e602855.html" target="_blank">202957a9-2cbd-4d1e-9c87-91802e602855.html</a></li>
-            <li><strong>Lindsay Swannack</strong>: <a href="a4e92164-6f7e-4f72-8b12-686bda499a8f.html" target="_blank">a4e92164-6f7e-4f72-8b12-686bda499a8f.html</a></li>
-            <li><strong>Rowan Swannack</strong>: <a href="3416be4f-6ee3-47c6-9e2a-8b31040597af.html" target="_blank">3416be4f-6ee3-47c6-9e2a-8b31040597af.html</a></li>
-            <li><strong>Shane Swannack</strong>: <a href="383dc9f7-cd3e-4ab4-b3ee-76c6f1c0f93b.html" target="_blank">383dc9f7-cd3e-4ab4-b3ee-76c6f1c0f93b.html</a></li>
-            </ul>
+
+            <div class="person-item">
+                <div class="person-name">Audrey Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">c78cc8cf-b6e2-4a86-8e13-4bf1bed3ffe4.html</div>
+                    <button class="copy-btn" onclick="copyLink('c78cc8cf-b6e2-4a86-8e13-4bf1bed3ffe4.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Cole Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">4dad6545-717f-4f72-94dc-04ceff67849a.html</div>
+                    <button class="copy-btn" onclick="copyLink('4dad6545-717f-4f72-94dc-04ceff67849a.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Harriet Stockman</div>
+                <div class="link-container">
+                    <div class="link-display">5c79e6c3-3a92-43f5-a874-192d7315b281.html</div>
+                    <button class="copy-btn" onclick="copyLink('5c79e6c3-3a92-43f5-a874-192d7315b281.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Jane Rayswan</div>
+                <div class="link-container">
+                    <div class="link-display">62de0fa6-e1ad-4824-9285-e0fa8cb6fde1.html</div>
+                    <button class="copy-btn" onclick="copyLink('62de0fa6-e1ad-4824-9285-e0fa8cb6fde1.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Jerome Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">065453d8-8704-44ac-9350-a56e52ae34b6.html</div>
+                    <button class="copy-btn" onclick="copyLink('065453d8-8704-44ac-9350-a56e52ae34b6.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Jessica</div>
+                <div class="link-container">
+                    <div class="link-display">411652dd-fe62-4e1c-ad70-65ec272590dc.html</div>
+                    <button class="copy-btn" onclick="copyLink('411652dd-fe62-4e1c-ad70-65ec272590dc.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Kayla Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">202957a9-2cbd-4d1e-9c87-91802e602855.html</div>
+                    <button class="copy-btn" onclick="copyLink('202957a9-2cbd-4d1e-9c87-91802e602855.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Lindsay Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">a4e92164-6f7e-4f72-8b12-686bda499a8f.html</div>
+                    <button class="copy-btn" onclick="copyLink('a4e92164-6f7e-4f72-8b12-686bda499a8f.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Rowan Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">3416be4f-6ee3-47c6-9e2a-8b31040597af.html</div>
+                    <button class="copy-btn" onclick="copyLink('3416be4f-6ee3-47c6-9e2a-8b31040597af.html', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <div class="person-item">
+                <div class="person-name">Shane Swannack</div>
+                <div class="link-container">
+                    <div class="link-display">383dc9f7-cd3e-4ab4-b3ee-76c6f1c0f93b.html</div>
+                    <button class="copy-btn" onclick="copyLink('383dc9f7-cd3e-4ab4-b3ee-76c6f1c0f93b.html', this)">Copy Link</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function copyLink(filename, button) {
+            // Construct the full URL
+            const baseUrl = window.location.origin + '/secret-santa/';
+            const fullUrl = baseUrl + filename;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(fullUrl).then(() => {
+                // Show success feedback
+                showToast('Link copied to clipboard!');
+
+                // Change button text temporarily
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                showToast('Failed to copy. Please copy manually.');
+                console.error('Copy failed:', err);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Prevent accidental navigation
+        window.addEventListener('beforeunload', (e) => {
+            // Don't show warning for now, but you can uncomment this if needed
+            // e.preventDefault();
+            // e.returnValue = '';
+        });
+    </script>
 </body>
 </html>
