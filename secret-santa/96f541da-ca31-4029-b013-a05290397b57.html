@@ -16,7 +16,7 @@ layout: none
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #2c1810 0%, #1a0f0a 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -31,11 +31,10 @@ layout: none
         .snowflake {
             position: absolute;
             top: -10px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1em;
             animation: fall linear infinite;
             pointer-events: none;
-            z-index: 1;
         }
 
         @keyframes fall {
@@ -70,228 +69,174 @@ layout: none
             font-weight: bold;
         }
 
-        /* 3D Gift Box Container */
+        /* 3D Gift Box */
         .gift-container {
-            perspective: 1500px;
+            perspective: 1000px;
             z-index: 10;
-            position: relative;
         }
 
-        .gift-scene {
-            width: 250px;
-            height: 300px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 2s;
-        }
-
-        .gift-scene:not(.opened) {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-20px) rotateY(10deg); }
-        }
-
-        /* Gift Box Base */
-        .box-base {
-            width: 250px;
+        .gift-box {
+            width: 200px;
             height: 200px;
-            position: absolute;
-            bottom: 0;
+            position: relative;
             transform-style: preserve-3d;
+            animation: rotate 8s infinite linear;
             cursor: pointer;
+            transition: all 0.5s ease;
         }
 
-        .box-base .side {
+        .gift-box.opened {
+            animation: none;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .face {
             position: absolute;
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            border: 2px solid #ffd700;
-        }
-
-        .box-base .front {
-            width: 250px;
+            width: 200px;
             height: 200px;
-            transform: translateZ(125px);
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            border: 3px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
         }
 
-        .box-base .back {
-            width: 250px;
-            height: 200px;
-            transform: rotateY(180deg) translateZ(125px);
-        }
+        .front  { transform: translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .right  { transform: rotateY(90deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .top    { transform: rotateX(90deg) translateZ(100px); background: #ffd700; }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
 
-        .box-base .left {
-            width: 250px;
-            height: 200px;
-            transform: rotateY(-90deg) translateZ(125px);
-        }
-
-        .box-base .right {
-            width: 250px;
-            height: 200px;
-            transform: rotateY(90deg) translateZ(125px);
-        }
-
-        .box-base .bottom {
-            width: 250px;
-            height: 250px;
-            transform: rotateX(-90deg) translateZ(0px);
-            background: #8b0000;
-        }
-
-        /* Ribbon on base */
-        .ribbon {
+        /* Ribbon */
+        .ribbon-v {
             position: absolute;
+            width: 40px;
+            height: 200px;
             background: #ffd700;
-            z-index: 10;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
         }
 
-        .ribbon.vertical {
-            width: 50px;
-            height: 200px;
-            left: 100px;
-            top: 0;
-        }
-
-        .ribbon.horizontal {
-            width: 250px;
-            height: 50px;
-            left: 0;
-            top: 75px;
-        }
-
-        /* Gift Box Lid */
-        .box-lid {
-            width: 250px;
-            height: 100px;
+        .ribbon-h {
             position: absolute;
-            bottom: 200px;
-            transform-style: preserve-3d;
-            transition: transform 1.5s ease;
-            transform-origin: bottom center;
-            cursor: pointer;
+            width: 200px;
+            height: 40px;
+            background: #ffd700;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
         }
 
-        .gift-scene.opened .box-lid {
-            transform: rotateX(-120deg) translateZ(-50px);
-        }
-
-        .box-lid .side {
-            position: absolute;
-            background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%);
-            border: 2px solid #ffd700;
-        }
-
-        .box-lid .top {
-            width: 250px;
-            height: 250px;
-            transform: rotateX(90deg) translateZ(100px);
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            border: 2px solid #dc143c;
-        }
-
-        .box-lid .front {
-            width: 250px;
-            height: 100px;
-            transform: translateZ(125px);
-        }
-
-        .box-lid .back {
-            width: 250px;
-            height: 100px;
-            transform: rotateY(180deg) translateZ(125px);
-        }
-
-        .box-lid .left {
-            width: 250px;
-            height: 100px;
-            transform: rotateY(-90deg) translateZ(125px);
-        }
-
-        .box-lid .right {
-            width: 250px;
-            height: 100px;
-            transform: rotateY(90deg) translateZ(125px);
-        }
-
-        /* Bow on lid */
         .bow {
             position: absolute;
-            top: -40px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
+            font-size: 3em;
+            z-index: 10;
+        }
+
+        /* Reveal Section */
+        .reveal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .reveal.active {
+            display: flex;
+        }
+
+        .reveal-content {
+            text-align: center;
+            color: white;
+            animation: revealFade 1s ease-in;
+        }
+
+        @keyframes revealFade {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .reveal-content h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+
+        .reveal-content .name {
             font-size: 4em;
-            z-index: 20;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
-        }
-
-        /* Name reveal inside box */
-        .name-reveal {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2.5em;
             font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            margin: 30px 0;
+        }
+
+        .reveal-content .budget {
+            font-size: 1.8em;
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
-            opacity: 0;
-            transition: opacity 1s ease 1s;
-            z-index: 5;
-            white-space: nowrap;
-            max-width: 90%;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            margin: 20px 0;
         }
 
-        .gift-scene.opened .name-reveal {
-            opacity: 1;
-        }
-
-        /* Budget info */
-        .budget-info {
-            position: absolute;
-            bottom: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5em;
-            color: #ffd700;
-            opacity: 0;
-            transition: opacity 1s ease 2s;
-            white-space: nowrap;
-        }
-
-        .gift-scene.opened .budget-info {
-            opacity: 1;
+        .reveal-content .message {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            max-width: 500px;
+            margin: 20px auto;
+            line-height: 1.6;
         }
 
         /* Confetti */
         .confetti {
             position: fixed;
-            width: 15px;
-            height: 15px;
-            z-index: 1000;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            position: absolute;
+            animation: confetti-fall 3s linear;
         }
 
         @keyframes confetti-fall {
             to {
-                transform: translateY(100vh) rotate(720deg);
+                transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Firework particle */
-        .firework-particle {
+        /* Firework */
+        .firework {
             position: fixed;
-            width: 8px;
-            height: 8px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            z-index: 999;
+            animation: firework 1s ease-out;
         }
 
-        @keyframes explode {
+        @keyframes firework {
             0% {
                 transform: translate(0, 0);
                 opacity: 1;
@@ -303,26 +248,18 @@ layout: none
         }
 
         .tap-hint {
-            margin-top: 50px;
+            margin-top: 30px;
             color: #ffd700;
-            font-size: 1.3em;
+            font-size: 1.2em;
             animation: pulse 2s infinite;
-            opacity: 1;
-            transition: opacity 0.5s;
-        }
-
-        .tap-hint.hidden {
-            opacity: 0;
         }
 
         @keyframes pulse {
             0%, 100% {
                 opacity: 1;
-                transform: scale(1);
             }
             50% {
-                opacity: 0.6;
-                transform: scale(1.05);
+                opacity: 0.5;
             }
         }
 
@@ -335,68 +272,35 @@ layout: none
                 font-size: 1.1em;
             }
 
-            .gift-scene {
-                width: 200px;
-                height: 250px;
-            }
-
-            .box-base {
-                width: 200px;
+            .gift-box {
+                width: 150px;
                 height: 150px;
             }
 
-            .box-base .front, .box-base .back {
-                width: 200px;
+            .face {
+                width: 150px;
                 height: 150px;
-                transform: translateZ(100px);
             }
 
-            .box-base .back {
-                transform: rotateY(180deg) translateZ(100px);
-            }
+            .front  { transform: translateZ(75px); }
+            .back   { transform: rotateY(180deg) translateZ(75px); }
+            .right  { transform: rotateY(90deg) translateZ(75px); }
+            .left   { transform: rotateY(-90deg) translateZ(75px); }
+            .top    { transform: rotateX(90deg) translateZ(75px); }
+            .bottom { transform: rotateX(-90deg) translateZ(75px); }
 
-            .box-base .left, .box-base .right {
-                width: 200px;
+            .ribbon-v {
+                width: 30px;
                 height: 150px;
-                transform: rotateY(-90deg) translateZ(100px);
             }
 
-            .box-base .right {
-                transform: rotateY(90deg) translateZ(100px);
+            .ribbon-h {
+                width: 150px;
+                height: 30px;
             }
 
-            .box-lid {
-                width: 200px;
-                bottom: 150px;
-            }
-
-            .box-lid .top {
-                width: 200px;
-                height: 200px;
-            }
-
-            .box-lid .front, .box-lid .back, .box-lid .left, .box-lid .right {
-                width: 200px;
-            }
-
-            .box-lid .front {
-                transform: translateZ(100px);
-            }
-
-            .box-lid .back {
-                transform: rotateY(180deg) translateZ(100px);
-            }
-
-            .box-lid .left {
-                transform: rotateY(-90deg) translateZ(100px);
-            }
-
-            .box-lid .right {
-                transform: rotateY(90deg) translateZ(100px);
-            }
-
-            .name-reveal {
-                font-size: 2em;
+            .reveal-content .name {
+                font-size: 2.5em;
             }
         }
     </style>
@@ -419,32 +323,34 @@ layout: none
     </div>
 
     <div class="gift-container">
-        <div class="gift-scene" id="giftScene" onclick="openGift()">
-            <div class="box-lid" id="boxLid">
-                <div class="bow">🎀</div>
-                <div class="side top"></div>
-                <div class="side front"></div>
-                <div class="side back"></div>
-                <div class="side left"></div>
-                <div class="side right"></div>
-            </div>
-
-            <div class="box-base">
-                <div class="ribbon vertical"></div>
-                <div class="ribbon horizontal"></div>
-                <div class="side front"></div>
-                <div class="side back"></div>
-                <div class="side left"></div>
-                <div class="side right"></div>
-                <div class="side bottom"></div>
-            </div>
-
-            <div class="name-reveal">Lindsay Swannack</div>
-            <div class="budget-info">💰 Budget: $57 💰</div>
+        <div class="gift-box" id="giftBox" onclick="openGift()">
+            <div class="bow">🎀</div>
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+            <div class="face front">🎁</div>
+            <div class="face back">🎁</div>
+            <div class="face right">🎁</div>
+            <div class="face left">🎁</div>
+            <div class="face top"></div>
+            <div class="face bottom">🎁</div>
         </div>
     </div>
 
-    <div class="tap-hint" id="tapHint">👆 Tap the gift to open!</div>
+    <div class="tap-hint">👆 Tap the gift to open!</div>
+
+    <!-- Reveal Section -->
+    <div class="reveal" id="reveal">
+        <div class="reveal-content">
+            <h2>🎯 You are Secret Santa for:</h2>
+            <div class="name">Lindsay Swannack</div>
+            <div class="budget">💰 Budget: <span class="lucky-number">$57</span> 💰</div>
+            <div class="message">
+                🤫 Remember to keep it secret!<br>
+                🎁 Have fun finding the perfect gift!<br>
+                ✨ Happy Holidays! ✨
+            </div>
+        </div>
+    </div>
 
     <script>
         let opened = false;
@@ -453,82 +359,68 @@ layout: none
             if (opened) return;
             opened = true;
 
-            const giftScene = document.getElementById('giftScene');
-            const tapHint = document.getElementById('tapHint');
+            const giftBox = document.getElementById('giftBox');
+            const reveal = document.getElementById('reveal');
 
-            // Hide tap hint
-            tapHint.classList.add('hidden');
+            // Stop rotation and add opened class
+            giftBox.classList.add('opened');
 
-            // Open the box
-            giftScene.classList.add('opened');
-
-            // Start confetti immediately
-            setTimeout(createConfetti, 500);
-
-            // Start fireworks after lid opens
-            setTimeout(createFireworks, 1000);
+            // Show reveal after a short delay
+            setTimeout(() => {
+                reveal.classList.add('active');
+                createConfetti();
+                createFireworks();
+            }, 500);
         }
 
         function createConfetti() {
-            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f38181', '#95e1d3', '#f38181'];
-            const giftRect = document.getElementById('giftScene').getBoundingClientRect();
-            const startX = giftRect.left + giftRect.width / 2;
-            const startY = giftRect.top;
-
-            for (let i = 0; i < 150; i++) {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f38181'];
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
-                    confetti.style.left = startX + 'px';
-                    confetti.style.top = startY + 'px';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-                    const angle = (Math.random() - 0.5) * Math.PI;
-                    const velocity = 200 + Math.random() * 300;
-                    const duration = 2 + Math.random() * 2;
-
-                    confetti.style.animation = `confetti-fall ${duration}s ease-out forwards`;
-                    confetti.style.setProperty('--angle', angle);
-
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
                     document.body.appendChild(confetti);
 
-                    setTimeout(() => confetti.remove(), duration * 1000);
-                }, i * 20);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
             }
         }
 
         function createFireworks() {
-            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f38181', '#95e1d3', '#fff', '#ff1493'];
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f38181', '#fff'];
 
             function createFirework() {
-                const x = window.innerWidth * (0.2 + Math.random() * 0.6);
-                const y = window.innerHeight * (0.1 + Math.random() * 0.4);
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
 
-                for (let i = 0; i < 40; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'firework-particle';
-                    particle.style.left = x + 'px';
-                    particle.style.top = y + 'px';
-                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                for (let i = 0; i < 30; i++) {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = x + 'px';
+                    firework.style.top = y + 'px';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-                    const angle = (Math.PI * 2 * i) / 40;
-                    const velocity = 80 + Math.random() * 120;
+                    const angle = (Math.PI * 2 * i) / 30;
+                    const velocity = 50 + Math.random() * 100;
                     const dx = Math.cos(angle) * velocity;
                     const dy = Math.sin(angle) * velocity;
 
-                    particle.style.setProperty('--x', dx + 'px');
-                    particle.style.setProperty('--y', dy + 'px');
-                    particle.style.animation = 'explode 1.2s ease-out forwards';
+                    firework.style.setProperty('--x', dx + 'px');
+                    firework.style.setProperty('--y', dy + 'px');
 
-                    document.body.appendChild(particle);
+                    document.body.appendChild(firework);
 
-                    setTimeout(() => particle.remove(), 1200);
+                    setTimeout(() => firework.remove(), 1000);
                 }
             }
 
-            // Create 8 fireworks
-            for (let i = 0; i < 8; i++) {
-                setTimeout(createFirework, i * 400);
+            // Create multiple fireworks
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createFirework, i * 300);
             }
         }
     </script>
