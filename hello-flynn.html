@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Flynn!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .square {
+            transform: rotate(45deg);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 87px solid;
+        }
+
+        .message-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 80px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 5em;
+            color: #fff;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+            margin: 0;
+        }
+
+        .emoji {
+            font-size: 4em;
+            display: inline-block;
+            animation: bounce 1s ease-in-out infinite;
+            margin: 0 10px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px rgba(255, 255, 255, 0.8),
+                    0 0 20px rgba(255, 255, 255, 0.6),
+                    0 0 30px rgba(255, 255, 255, 0.4);
+            }
+            to {
+                text-shadow:
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 30px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            from {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+
+        @keyframes float-around {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(100px, 0);
+            }
+            75% {
+                transform: translate(50px, -50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background"></div>
+
+    <div class="message-container">
+        <span class="emoji">👋</span>
+        <h1>Hello Flynn!</h1>
+        <span class="emoji">🎉</span>
+    </div>
+
+    <script>
+        const background = document.getElementById('background');
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff', '#48dbfb', '#1dd1a1'];
+        const shapes = ['circle', 'square', 'triangle'];
+
+        function createShape() {
+            const shape = document.createElement('div');
+            shape.className = `shape ${shapes[Math.floor(Math.random() * shapes.length)]}`;
+
+            const size = Math.random() * 100 + 50;
+            shape.style.width = size + 'px';
+            shape.style.height = size + 'px';
+            shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            shape.style.left = Math.random() * 100 + '%';
+            shape.style.top = Math.random() * 100 + '%';
+
+            const duration = Math.random() * 10 + 5;
+            const animation = Math.random() > 0.5 ? 'spin' : 'spin-reverse';
+            shape.style.animation = `${animation} ${duration}s linear infinite`;
+
+            background.appendChild(shape);
+
+            setTimeout(() => {
+                shape.style.transition = 'all 15s linear';
+                shape.style.left = Math.random() * 100 + '%';
+                shape.style.top = Math.random() * 100 + '%';
+            }, 100);
+
+            setTimeout(() => {
+                shape.remove();
+            }, 15000);
+        }
+
+        // Create initial shapes
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createShape, i * 200);
+        }
+
+        // Keep creating new shapes
+        setInterval(createShape, 800);
+
+        // Add some sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'absolute';
+            sparkle.style.fontSize = Math.random() * 30 + 20 + 'px';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.zIndex = '5';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'float 3s ease-in-out';
+
+            background.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        setInterval(createSparkle, 1500);
+    </script>
+</body>
+</html>
